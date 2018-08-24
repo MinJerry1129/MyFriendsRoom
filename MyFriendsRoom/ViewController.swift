@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //This is the newest comment of the hello world
         // Do any additional setup after loading the view, typically from a nib.
         //Hello World
         
@@ -19,6 +20,7 @@ class ViewController: UIViewController {
         
         //THIS IS FOR THE REMOTE
         //asd
+        //Hi there. I can see you
     }
 
     override func didReceiveMemoryWarning() {
