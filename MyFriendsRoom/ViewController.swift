@@ -18,6 +18,7 @@ class ViewController: UIViewController {
         //WE SHALL TRY TO MERGE THIS
         
         //THIS IS FOR THE REMOTE
+        //asd
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,4 +28,3 @@ class ViewController: UIViewController {
 
 
 }
-
