@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         
         //THIS IS FOR THE REMOTE
         //asd
+        //null
     }
 
     override func didReceiveMemoryWarning() {
