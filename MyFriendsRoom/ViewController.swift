@@ -41,6 +41,7 @@ class ViewController: UIViewController {
         //32
         //33
         // 19 13
+        //19 22
     }
 
     override func didReceiveMemoryWarning() {
