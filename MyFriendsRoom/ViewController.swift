@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         
         //32
         //33
-        
+        // 19 13
     }
 
     override func didReceiveMemoryWarning() {
