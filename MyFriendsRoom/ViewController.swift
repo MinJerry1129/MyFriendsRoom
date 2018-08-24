@@ -22,8 +22,7 @@ class ViewController: UIViewController {
         //asd
         //null
         //hfghj
-        
-        //testing 
+        //testing  
     }
 
     override func didReceiveMemoryWarning() {
