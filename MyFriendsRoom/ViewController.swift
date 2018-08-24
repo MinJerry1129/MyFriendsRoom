@@ -21,6 +21,7 @@ class ViewController: UIViewController {
         //THIS IS FOR THE REMOTE
         //asd
         //null
+        //hfghj
     }
 
     override func didReceiveMemoryWarning() {
