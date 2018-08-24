@@ -16,7 +16,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         //Hello World
         
-        //salam aleykum motherf
         
         //WE SHALL TRY TO MERGE THIS
         
