@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,92 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MyFriendsRoom" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign up or sign in with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izi-9Y-E9F">
+                                <rect key="frame" x="61" y="63" width="172.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" red="0.42745098039215684" green="0.41176470588235292" blue="0.40784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTy-GX-Vc7">
+                                <rect key="frame" x="53" y="111" width="268" height="48"/>
+                                <color key="backgroundColor" red="0.97254901960784312" green="0.6588235294117647" blue="0.10980392156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Hv4-MV-0ah"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                <state key="normal" title="Instagram">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tow-JY-mk6">
+                                <rect key="frame" x="53" y="178" width="268" height="48"/>
+                                <color key="backgroundColor" red="0.23529411764705882" green="0.33725490196078434" blue="0.59607843137254901" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Q09-5J-DFJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                <state key="normal" title="Facebook">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Xz-Rl-PO1">
+                                <rect key="frame" x="53" y="245" width="268" height="48"/>
+                                <color key="backgroundColor" red="0.42745098039215684" green="0.41176470588235292" blue="0.40784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="jpK-hK-3A0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                <state key="normal" title="Email">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="tow-JY-mk6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="53" id="7H6-B3-v0S"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6Xz-Rl-PO1" secondAttribute="trailing" constant="54" id="Fp2-Kw-Muy"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6Xz-Rl-PO1" secondAttribute="bottom" constant="412" id="Iih-IY-xIb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sTy-GX-Vc7" secondAttribute="trailing" constant="54" id="JLM-d3-qLE"/>
+                            <constraint firstItem="tow-JY-mk6" firstAttribute="top" secondItem="sTy-GX-Vc7" secondAttribute="bottom" constant="19" id="LuX-s9-Pa9"/>
+                            <constraint firstItem="6Xz-Rl-PO1" firstAttribute="top" secondItem="tow-JY-mk6" secondAttribute="bottom" constant="19" id="Sid-Jg-0kQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tow-JY-mk6" secondAttribute="trailing" constant="54" id="TW4-KN-rEM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6Xz-Rl-PO1" secondAttribute="trailing" constant="54" id="ayQ-hu-2cT"/>
+                            <constraint firstItem="tow-JY-mk6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="53" id="fjr-Mx-aG0"/>
+                            <constraint firstItem="sTy-GX-Vc7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="53" id="gIm-Kn-qnW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tow-JY-mk6" secondAttribute="trailing" constant="54" id="hvQ-8E-jDz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tow-JY-mk6" secondAttribute="trailing" constant="54" id="lcD-d3-pm9"/>
+                            <constraint firstItem="Izi-9Y-E9F" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-40.25" id="mNu-QG-OB6"/>
+                            <constraint firstItem="sTy-GX-Vc7" firstAttribute="top" secondItem="Izi-9Y-E9F" secondAttribute="bottom" constant="27" id="p8l-xZ-1au"/>
+                            <constraint firstItem="Izi-9Y-E9F" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="61" id="vsN-2R-91D"/>
+                            <constraint firstItem="6Xz-Rl-PO1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="53" id="xHZ-cg-Rfc"/>
+                            <constraint firstItem="Izi-9Y-E9F" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="43" id="yAX-gR-Z4T"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Fp2-Kw-Muy"/>
+                                <exclude reference="Iih-IY-xIb"/>
+                                <exclude reference="hvQ-8E-jDz"/>
+                                <exclude reference="lcD-d3-pm9"/>
+                                <exclude reference="7H6-B3-v0S"/>
+                                <exclude reference="mNu-QG-OB6"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="email_btn" destination="6Xz-Rl-PO1" id="A3r-SF-IeE"/>
+                        <outlet property="fb_btn" destination="tow-JY-mk6" id="Hel-Pp-r75"/>
+                        <outlet property="insta_btn" destination="sTy-GX-Vc7" id="NoN-Zv-vWB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="795" y="120.4225352112676"/>
         </scene>
     </scenes>
 </document>
