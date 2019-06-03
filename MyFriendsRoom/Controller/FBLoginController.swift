@@ -405,6 +405,15 @@ class FBLoginController: UIViewController, UITextFieldDelegate {
         tcb.backgroundColor = CustomColors.lightGrey1
         return tcb
     }()
+    let portoDiscountButton: UIButton = {
+        let tcb = UIButton()
+        tcb.addTarget(self, action: #selector(portoDiscountReferalSelect), for: .touchUpInside)
+        tcb.translatesAutoresizingMaskIntoConstraints = false
+        tcb.setTitle("Porto discount card", for: [])
+        tcb.setTitleColor(CustomColors.commonGrey1, for: [])
+        tcb.backgroundColor = CustomColors.lightGrey1
+        return tcb
+    }()
     let appStoreReferalButton: UIButton = {
         let tcb = UIButton()
         tcb.addTarget(self, action: #selector(appStoreReferalSelect), for: .touchUpInside)
@@ -533,6 +542,7 @@ class FBLoginController: UIViewController, UITextFieldDelegate {
         let selectorReferalTitle = "From a person"
         selectorReferalButton.setTitle(selectorReferalTitle, for: [])
         fromPersonReferalButton.backgroundColor = CustomColors.lightBlue1
+        portoDiscountButton.backgroundColor = CustomColors.lightGrey1
         appStoreReferalButton.backgroundColor = CustomColors.lightGrey1
         playStoreReferalButton.backgroundColor = CustomColors.lightGrey1
         instagramReferalButton.backgroundColor = CustomColors.lightGrey1
@@ -546,10 +556,30 @@ class FBLoginController: UIViewController, UITextFieldDelegate {
         fromPerson = true
         selectedReferalMethod = "from a person"
     }
+    @objc func portoDiscountReferalSelect(){
+        let selectorReferalTitle = "Porto discount card"
+        selectorReferalButton.setTitle(selectorReferalTitle, for: [])
+        fromPersonReferalButton.backgroundColor = CustomColors.lightGrey1
+        portoDiscountButton.backgroundColor = CustomColors.lightBlue1
+        appStoreReferalButton.backgroundColor = CustomColors.lightGrey1
+        playStoreReferalButton.backgroundColor = CustomColors.lightGrey1
+        instagramReferalButton.backgroundColor = CustomColors.lightGrey1
+        facebookReferalButton.backgroundColor = CustomColors.lightGrey1
+        mfrSiteReferalButton.backgroundColor = CustomColors.lightGrey1
+        mfrMeetUpReferalButton.backgroundColor = CustomColors.lightGrey1
+        googleReferalButton.backgroundColor = CustomColors.lightGrey1
+        otherReferalButton.backgroundColor = CustomColors.lightGrey1
+        optionsReferalContainer.isHidden = true
+        hideUnhideReferalInputs(action: "hide")
+        fromPerson = false
+        selectedReferalMethod = "porto discount card"
+        
+    }
     @objc func appStoreReferalSelect(){
         let selectorReferalTitle = "App Store"
         selectorReferalButton.setTitle(selectorReferalTitle, for: [])
         fromPersonReferalButton.backgroundColor = CustomColors.lightGrey1
+        portoDiscountButton.backgroundColor = CustomColors.lightGrey1
         appStoreReferalButton.backgroundColor = CustomColors.lightBlue1
         playStoreReferalButton.backgroundColor = CustomColors.lightGrey1
         instagramReferalButton.backgroundColor = CustomColors.lightGrey1
@@ -568,6 +598,7 @@ class FBLoginController: UIViewController, UITextFieldDelegate {
         let selectorReferalTitle = "Play Store"
         selectorReferalButton.setTitle(selectorReferalTitle, for: [])
         fromPersonReferalButton.backgroundColor = CustomColors.lightGrey1
+        portoDiscountButton.backgroundColor = CustomColors.lightGrey1
         appStoreReferalButton.backgroundColor = CustomColors.lightGrey1
         playStoreReferalButton.backgroundColor = CustomColors.lightBlue1
         instagramReferalButton.backgroundColor = CustomColors.lightGrey1
@@ -586,6 +617,7 @@ class FBLoginController: UIViewController, UITextFieldDelegate {
         let selectorReferalTitle = "Instagram"
         selectorReferalButton.setTitle(selectorReferalTitle, for: [])
         fromPersonReferalButton.backgroundColor = CustomColors.lightGrey1
+        portoDiscountButton.backgroundColor = CustomColors.lightGrey1
         appStoreReferalButton.backgroundColor = CustomColors.lightGrey1
         playStoreReferalButton.backgroundColor = CustomColors.lightGrey1
         instagramReferalButton.backgroundColor = CustomColors.lightBlue1
@@ -604,6 +636,7 @@ class FBLoginController: UIViewController, UITextFieldDelegate {
         let selectorReferalTitle = "Facebook"
         selectorReferalButton.setTitle(selectorReferalTitle, for: [])
         fromPersonReferalButton.backgroundColor = CustomColors.lightGrey1
+        portoDiscountButton.backgroundColor = CustomColors.lightGrey1
         appStoreReferalButton.backgroundColor = CustomColors.lightGrey1
         playStoreReferalButton.backgroundColor = CustomColors.lightGrey1
         instagramReferalButton.backgroundColor = CustomColors.lightGrey1
@@ -622,6 +655,7 @@ class FBLoginController: UIViewController, UITextFieldDelegate {
         let selectorReferalTitle = "MyFriendsRoom website"
         selectorReferalButton.setTitle(selectorReferalTitle, for: [])
         fromPersonReferalButton.backgroundColor = CustomColors.lightGrey1
+        portoDiscountButton.backgroundColor = CustomColors.lightGrey1
         appStoreReferalButton.backgroundColor = CustomColors.lightGrey1
         playStoreReferalButton.backgroundColor = CustomColors.lightGrey1
         instagramReferalButton.backgroundColor = CustomColors.lightGrey1
@@ -640,6 +674,7 @@ class FBLoginController: UIViewController, UITextFieldDelegate {
         let selectorReferalTitle = "MyFriendsRoom meetup"
         selectorReferalButton.setTitle(selectorReferalTitle, for: [])
         fromPersonReferalButton.backgroundColor = CustomColors.lightGrey1
+        portoDiscountButton.backgroundColor = CustomColors.lightGrey1
         appStoreReferalButton.backgroundColor = CustomColors.lightGrey1
         playStoreReferalButton.backgroundColor = CustomColors.lightGrey1
         instagramReferalButton.backgroundColor = CustomColors.lightGrey1
@@ -658,6 +693,7 @@ class FBLoginController: UIViewController, UITextFieldDelegate {
         let selectorReferalTitle = "Google"
         selectorReferalButton.setTitle(selectorReferalTitle, for: [])
         fromPersonReferalButton.backgroundColor = CustomColors.lightGrey1
+        portoDiscountButton.backgroundColor = CustomColors.lightGrey1
         appStoreReferalButton.backgroundColor = CustomColors.lightGrey1
         playStoreReferalButton.backgroundColor = CustomColors.lightGrey1
         instagramReferalButton.backgroundColor = CustomColors.lightGrey1
@@ -676,6 +712,7 @@ class FBLoginController: UIViewController, UITextFieldDelegate {
         let selectorReferalTitle = "Other"
         selectorReferalButton.setTitle(selectorReferalTitle, for: [])
         fromPersonReferalButton.backgroundColor = CustomColors.lightGrey1
+        portoDiscountButton.backgroundColor = CustomColors.lightGrey1
         appStoreReferalButton.backgroundColor = CustomColors.lightGrey1
         playStoreReferalButton.backgroundColor = CustomColors.lightGrey1
         instagramReferalButton.backgroundColor = CustomColors.lightGrey1
@@ -805,8 +842,9 @@ class FBLoginController: UIViewController, UITextFieldDelegate {
     var referalContainerViewHeightAnchor: NSLayoutConstraint?
     func setupReferralSegment(){
         
-        scrollView.addSubview(optionsReferalContainer)
+        scrollView.addSubview(optionsReferalContainer)//portoDiscountButton
         optionsReferalContainer.addSubview(fromPersonReferalButton)
+        optionsReferalContainer.addSubview(portoDiscountButton)
         optionsReferalContainer.addSubview(appStoreReferalButton)
         optionsReferalContainer.addSubview(playStoreReferalButton)
         optionsReferalContainer.addSubview(instagramReferalButton)
@@ -846,7 +884,13 @@ class FBLoginController: UIViewController, UITextFieldDelegate {
         fromPersonReferalButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         fromPersonReferalButton.titleLabel?.leftAnchor.constraint(equalTo: fromPersonReferalButton.leftAnchor, constant: 10).isActive = true
         
-        appStoreReferalButton.topAnchor.constraint(equalTo: fromPersonReferalButton.bottomAnchor).isActive = true
+        portoDiscountButton.topAnchor.constraint(equalTo: fromPersonReferalButton.bottomAnchor).isActive = true
+        portoDiscountButton.leftAnchor.constraint(equalTo: optionsReferalContainer.leftAnchor).isActive = true
+        portoDiscountButton.widthAnchor.constraint(equalTo: optionsReferalContainer.widthAnchor).isActive = true
+        portoDiscountButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        portoDiscountButton.titleLabel?.leftAnchor.constraint(equalTo: appStoreReferalButton.leftAnchor, constant: 10).isActive = true
+        
+        appStoreReferalButton.topAnchor.constraint(equalTo: portoDiscountButton.bottomAnchor).isActive = true
         appStoreReferalButton.leftAnchor.constraint(equalTo: optionsReferalContainer.leftAnchor).isActive = true
         appStoreReferalButton.widthAnchor.constraint(equalTo: optionsReferalContainer.widthAnchor).isActive = true
         appStoreReferalButton.heightAnchor.constraint(equalToConstant: 30).isActive = true

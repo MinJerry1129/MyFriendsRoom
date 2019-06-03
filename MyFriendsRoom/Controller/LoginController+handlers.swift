@@ -73,7 +73,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                                 return
                             }
                             if let profileImageUrl = url?.absoluteString {//InstanceID.instanceID().token()
-                                let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl, "age": age, "loc": loc, "occupation": occupation, "acceptingGuests": acceptingGuests, "meetChecked": meetChecked, "dateChecked": dateChecked, "travelChecked": travelChecked, "yourSex": yourSex, "aboutMe": aboutMe, "fromDevice":InstanceID.instanceID().token(), "referalMethod": referalMethod, "referalCode": (referalCode == "" ? nil : referalCode), "referalName": (referalName == "" ? nil : referalName), "referalCompany": (referalCompany == "" ? nil : referalCompany)] as [String : Any]
+                                let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl, "age": age, "loc": loc, "occupation": occupation, "acceptingGuests": acceptingGuests, "meetChecked": meetChecked, "dateChecked": dateChecked, "travelChecked": travelChecked, "yourSex": yourSex, "aboutMe": aboutMe, "fromDevice":InstanceID.instanceID().token(), "referalMethod": referalMethod, "referalCode": (referalCode == "" ? nil : referalCode), "referalName": (referalName == "" ? nil : referalName?.uppercased()), "referalCompany": (referalCompany == "" ? nil : referalCompany?.uppercased()), "platform": "iOS"] as [String : Any]
 //                                let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl, "age": age, "loc": loc, "occupation": occupation, "acceptingGuests": acceptingGuests, "meetChecked": meetChecked, "dateChecked": dateChecked, "travelChecked": travelChecked, "yourSex": yourSex, "fromDevice":AppDelegate.DEVICEID] as [String : Any]
                                 self.registerUserIntoDatabaseWithUID(uid: uid, values: values)
                             }
@@ -82,7 +82,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                     })
                 }
             } else {
-                let values = ["name": name, "email": email, "profileImageUrl": "empty", "age": age, "loc": loc, "occupation": occupation, "aboutMe": aboutMe, "acceptingGuests": acceptingGuests, "meetChecked": meetChecked, "dateChecked": dateChecked, "travelChecked": travelChecked, "yourSex": yourSex, "fromDevice":AppDelegate.DEVICEID, "referalMethod": referalMethod, "referalCode": (referalCode == "" ? nil : referalCode), "referalName": (referalName == "" ? nil : referalName), "referalCompany": (referalCompany == "" ? nil : referalCompany)] as [String : Any]
+                let values = ["name": name, "email": email, "profileImageUrl": "empty", "age": age, "loc": loc, "occupation": occupation, "aboutMe": aboutMe, "acceptingGuests": acceptingGuests, "meetChecked": meetChecked, "dateChecked": dateChecked, "travelChecked": travelChecked, "yourSex": yourSex, "fromDevice":AppDelegate.DEVICEID, "referalMethod": referalMethod, "referalCode": (referalCode == "" ? nil : referalCode), "referalName": (referalName == "" ? nil : referalName?.uppercased()), "referalCompany": (referalCompany == "" ? nil : referalCompany?.uppercased()), "platform": "iOS"] as [String : Any]
                 self.registerUserIntoDatabaseWithUID(uid: uid, values: values)
                 WelcomeController().dismissingWelcomeController()
             }

@@ -21,7 +21,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, CLLocati
 //    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        writeNewDeviceId()
 //        Database.database().isPersistenceEnabled = true
         getCurrentLocation()
         setActiveDisconectStatus()
@@ -174,8 +174,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, CLLocati
         }
     }
     func writeNewDeviceId() {
-        let uid = Auth.auth().currentUser?.uid
-        let ref = Database.database().reference().child("users").child(uid!)
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let ref = Database.database().reference().child("users").child(uid)
 //        print("AppDelegate.DEVICEID: ", AppDelegate.DEVICEID, "\nInstanceID.instanceID().token(): ", InstanceID.instanceID().token())
         ref.updateChildValues(["fromDevice": InstanceID.instanceID().token()])
 //        ref.updateChildValues(["fromDevice": AppDelegate.DEVICEID])
@@ -250,6 +250,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, CLLocati
     ///get user current location
     var currentDatabaseLocation: String?
     var currentGPSLocation: String?
+    var currentLatitude: Float?
+    var currrentLongitude: Float?
     func getCurrentLocation(){
         guard let uid = Auth.auth().currentUser?.uid else {
             currentDatabaseLocation = String()
@@ -304,9 +306,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, CLLocati
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("case5`")
         print("Did location updates is called")
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }//currentLatitude currrentLongitude
         print("locations = \(locValue.latitude) \(locValue.longitude)")
         let location = CLLocation(latitude: locValue.latitude, longitude: locValue.longitude)
+        currentLatitude = locValue.latitude as? Float
+        currrentLongitude = locValue.longitude as? Float
         fetchCityAndCountry(from: location) { city, country, error in
             guard let city = city, let country = country, error == nil else { return }
             print(city + ", " + country)
@@ -318,8 +322,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, CLLocati
         if /*self.currentDatabaseLocation != nil &&*/ self.currentGPSLocation != nil{
             if self.currentDatabaseLocation != self.currentGPSLocation {
                 guard let uid = Auth.auth().currentUser?.uid else {return}
-                let ref = Database.database().reference().child("users").child(uid).child("currentLoc")
-                ref.setValue(self.currentGPSLocation)
+                let ref = Database.database().reference().child("users").child(uid)//.child("currentLoc")
+                ref.updateChildValues(["currentLoc": self.currentGPSLocation, "currentLatitude": currentLatitude, "currrentLongitude": currrentLongitude])
                 self.currentDatabaseLocation = self.currentGPSLocation
             }
         }

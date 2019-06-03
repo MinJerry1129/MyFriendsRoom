@@ -151,6 +151,7 @@ class UserPhotosController: UIViewController, UICollectionViewDataSource, UIColl
 //    }
     @objc func goBack() {
         userApartmentsImagesRef.removeAllObservers()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadMyProfile"), object: nil)
         self.dismiss(animated: true, completion: nil)
     }
     func setupNavBarItems(){

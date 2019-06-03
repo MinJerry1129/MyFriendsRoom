@@ -7,7 +7,25 @@
 		<key>MyFriendsRoom.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>16</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>0DDF127C21302AFB001BA72D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0DDF129321302B16001BA72D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0DDF129E21302B16001BA72D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
