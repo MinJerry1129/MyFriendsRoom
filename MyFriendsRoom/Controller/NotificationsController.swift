@@ -93,6 +93,8 @@ class NotificationsController: UITableViewController {
                         }
                         count += 1
                     }
+                    
+                    unseenNotificationsCount = count
 //                    print("sngl: ", notificationsArray)
                 }
             }
