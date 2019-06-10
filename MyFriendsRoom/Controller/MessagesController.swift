@@ -223,7 +223,7 @@ class MessagesController: UITableViewController {
 //                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "globalBadgeCount"), object: nil)
 //                        let singleDialogCounterArray = [chatPartnerId: 0]
                         if unreadCountersDict[chatPartnerId] != nil {
-                            var currentCount = unreadCountersDict[chatPartnerId]?.hashValue as! Int
+                            var currentCount = unreadCountersDict[chatPartnerId] as! Int
                             currentCount += 1
                             unreadCountersDict.updateValue(currentCount, forKey: chatPartnerId)
                         } else {
