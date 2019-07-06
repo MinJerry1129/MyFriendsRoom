@@ -69,7 +69,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     lazy var restoreButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor.white
-        button.setTitle("Restore password", for: [])
+        button.setTitle("Forgotten your password?", for: [])
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(CustomColors.commonBlue1, for: [])
         button.layer.masksToBounds = true
@@ -78,7 +78,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
         return button
     }()
     @objc func restorePassword(){
-        let alert = UIAlertController(title: "Please enter an Email from your account", message:  "Password reset email will be send to your email adress", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Reset your password", message:  "Enter the email address you signed up with. If you signed up with Facebook enter the email you use for Facebook and create a password.", preferredStyle: .alert)
         alert.addTextField(configurationHandler: { email in
             email.placeholder = "Input your email here..."
         })
