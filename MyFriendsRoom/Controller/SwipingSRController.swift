@@ -10,6 +10,21 @@ import UIKit
 import Firebase
 var goToControllerByMemberUid: String?
 class SwipingSRControllet: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    
+    // Interface
+    let userTray = UsersTrayView()
+    lazy var locationLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        label.textColor = CustomColors.textGrey
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = .white
+        label.text = nil
+        label.textAlignment = .center
+        return label
+    }()
+    
     var youAreBanned = false
     var localFL = [searchResult]()
     let label: UITextField = {
@@ -25,17 +40,76 @@ class SwipingSRControllet: UICollectionViewController, UICollectionViewDelegateF
         super.viewDidLoad()
         self.collectionView?.dataSource = self
         checkIfYouAreBanned()
-        collectionView?.backgroundColor = CustomColors.lightBlue1
+        collectionView?.backgroundColor = .white
         collectionView?.register(ResultsPageCell.self, forCellWithReuseIdentifier: "cellId")
-        collectionView?.isPagingEnabled = true
+        collectionView?.register(UINib(nibName: "ResultsPageCell", bundle: nil), forCellWithReuseIdentifier: "cellId")
+        //collectionView?.isPagingEnabled = true
         NotificationCenter.default.addObserver(self, selector: #selector(srReloadData), name: NSNotification.Name(rawValue: "newSignin"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(srReloadData), name: NSNotification.Name(rawValue: "load"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.setLocalFL(_:)), name: NSNotification.Name(rawValue: "sendLocalFL"), object: nil)
         setupLabel()
         
+        
+        
+        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.itemSize = CGSize(width: view.bounds.width, height: view.bounds.height - 114 - 54 - 38 - 20)
+        }
+        
+        
+        
+        let mfrImageView: UIImageView = {
+            let imageView = UIImageView()
+            imageView.contentMode = .center
+            imageView.image = UIImage(named: "myfriendsroomlogoSmall")
+        //    imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.layer.masksToBounds = true
+            return imageView
+        }()
+        
+      
+        // Setup navigation bar
+        if let navigationBar = self.navigationController?.navigationBar {
+            navigationBar.shadowImage = UIImage()
+            navigationBar.isTranslucent = false
+            navigationBar.barTintColor = UIColor.white
+        }
+        navigationItem.titleView?.backgroundColor = .white
+        self.navigationItem.titleView = mfrImageView
+        
+        
+        // Top add another view
+        
+        
+        userTray.translatesAutoresizingMaskIntoConstraints = false
+        userTray.backgroundColor = CustomColors.tabBarTint
+        userTray.trayDelegate = self
+        view.addSubview(userTray)
+        NSLayoutConstraint.activate([
+            userTray.topAnchor.constraint(equalTo: view.topAnchor),
+            userTray.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            userTray.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            userTray.heightAnchor.constraint(equalToConstant: 90)            ])
+        
+        
+        view.addSubview(locationLabel)
+        
+        NSLayoutConstraint.activate([
+            locationLabel.topAnchor.constraint(equalTo: userTray.bottomAnchor),
+            locationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            locationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            locationLabel.heightAnchor.constraint(equalToConstant: 24)            ])
+        
+        collectionView?.contentInset.top = 114
+        
+        
     }
     @objc func setLocalFL(_ notification: NSNotification){
         localFL = (notification.userInfo?["dict"] as? [searchResult])!
+        
+        locationLabel.text = (notification.userInfo?["location"] as? String)
+        
+        userTray.datasource = localFL
+        
 //        setupLabel()
         hideLabel()
     }
@@ -224,9 +298,14 @@ class SwipingSRControllet: UICollectionViewController, UICollectionViewDelegateF
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! ResultsPageCell
 //        var arrayIndexPathItem = friendsLine[indexPath.item] as AnyObject
         var arrayIndexPathItem = localFL[indexPath.item] as AnyObject
-        cell.number = indexPath.item
-        cell.profileAvatarView.tag = indexPath.item
-//        cell.profileAvatarView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SwipingSRControllet.avGoToProfile(_:))))
+        
+   
+        // TODO: Modified
+//        cell.number = indexPath.item
+//        cell.profileAvatarView.tag = indexPath.item
+        cell.delegate = self
+        
+        //        cell.profileAvatarView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SwipingSRControllet.avGoToProfile(_:))))
         cell.theItem = arrayIndexPathItem as! searchResult
         return cell
     }
@@ -283,7 +362,7 @@ class SwipingSRControllet: UICollectionViewController, UICollectionViewDelegateF
     @objc func srReloadData(){
 //        localFL = friendsLine
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         self.collectionView?.reloadData()
         hideLabel()
     }
@@ -320,9 +399,9 @@ class SwipingSRControllet: UICollectionViewController, UICollectionViewDelegateF
             label.isHidden = false
         }
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: view.frame.width, height: view.frame.height)
+//    }
     func setupLabel(){
         view.addSubview(label)
         
@@ -331,5 +410,59 @@ class SwipingSRControllet: UICollectionViewController, UICollectionViewDelegateF
         label.heightAnchor.constraint(equalToConstant: 30).isActive = true
         label.widthAnchor.constraint(equalToConstant: 170).isActive = true
         hideLabel()
+    }
+    
+    
+    
+}
+
+
+
+extension SwipingSRControllet : ResultsPageCellDelegate {
+    
+    func didSelectLikeAction(_ cell: ResultsPageCell,  profile: searchResult) {
+        
+        guard let pid = profile.userId else { return }
+        
+        let uid = Auth.auth().currentUser!.uid
+        let ref = Database.database().reference(fromURL: "https://myfriendsroomtest.firebaseio.com/")
+        let usersReference = ref.child("users-wishlists").child(uid)
+        usersReference.updateChildValues([pid: 1])
+        
+        
+        // TODO: refresh the cell with animation here
+    }
+    
+    func didSelectViewAction(_ cell: ResultsPageCell, profile: searchResult) {
+        
+        guard let pid = profile.userId else { return }
+        
+        let uid = Auth.auth().currentUser!.uid
+        
+        goToControllerByMemberUid = pid
+        let memberProfileController = MemberProfileController()
+        memberProfileController.hidesBottomBarWhenPushed = true
+       // let memberProfileNav = UINavigationController(rootViewController: memberProfileController)
+       // self.present(memberProfileNav, animated: true, completion: nil)
+        self.navigationController?.pushViewController(memberProfileController, animated: true)
+    }
+    
+}
+
+
+extension SwipingSRControllet : UserTrayViewDelegate {
+    func userTrayCustomAction(_ id: Int) {
+        
+        // Custom actions here
+        
+    }
+    
+    func userTraySelectedProfileWithId(_ id: String) {
+        
+        goToControllerByMemberUid = id
+        let memberProfileController = MemberProfileController()
+        memberProfileController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(memberProfileController, animated: true)
+        
     }
 }

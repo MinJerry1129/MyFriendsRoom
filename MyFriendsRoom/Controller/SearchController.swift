@@ -33,7 +33,7 @@ class SearchController: UIViewController {
     }()
     let nameTextTitle: UITextField = {
         let tt = UITextField()
-        tt.textColor = CustomColors.commonGrey1
+        tt.textColor = CustomColors.textGrey
         tt.text = "By name"
         tt.translatesAutoresizingMaskIntoConstraints = false
         tt.isUserInteractionEnabled = false
@@ -47,22 +47,61 @@ class SearchController: UIViewController {
         tf.font = .systemFont(ofSize: 18)
         return tf
     }()
+    lazy var topStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [allMembersButton, contactsOnlyButton, advancedSearchButton])
+        stack.alignment = UIStackViewAlignment.center
+        stack.spacing = 14
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.backgroundColor = .clear
+        return stack
+    }()
     let allMembersButton: UIButton = {
         let b = UIButton()
+        b.frame = CGRect(x: 0, y: 0, width: 64.6, height: 64.6)
         b.addTarget(self, action: #selector(allMembersButtonCheck), for: .touchUpInside)
         b.translatesAutoresizingMaskIntoConstraints = false
         b.backgroundColor = CustomColors.lightOrange1
-        b.setTitle("ALL MEMBERS", for: .normal)
-        b.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        b.setTitle("all\nmembers", for: .normal)
+        b.titleLabel?.numberOfLines = 2
+        b.titleLabel?.textAlignment = .center
+        b.setTitleColor(.white, for: .normal)
+        b.titleLabel?.font = UIFont.systemFont(ofSize: 11, weight: .medium)
+        b.layer.cornerRadius = 64.6 / 2
+        b.widthAnchor.constraint(equalToConstant: 64.6).isActive = true
+        b.heightAnchor.constraint(equalToConstant: 64.6).isActive = true
         return b
     }()
     let contactsOnlyButton: UIButton = {
         let b = UIButton()
+        b.frame = CGRect(x: 0, y: 0, width: 64.6, height: 64.6)
         b.addTarget(self, action: #selector(contactsOnlyButtonCheck), for: .touchUpInside)
         b.translatesAutoresizingMaskIntoConstraints = false
-        b.backgroundColor = CustomColors.commonGrey1
-        b.setTitle("CONTACTS ONLY", for: .normal)
-        b.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        b.backgroundColor = CustomColors.buttonInactive
+        b.setTitle("contacts\nonly", for: .normal)
+        b.titleLabel?.numberOfLines = 2
+        b.titleLabel?.textAlignment = .center
+        b.setTitleColor(.white, for: .normal)
+        b.titleLabel?.font = UIFont.systemFont(ofSize: 11, weight: .medium)
+        b.layer.cornerRadius = 64.6 / 2
+        b.widthAnchor.constraint(equalToConstant: 64.6).isActive = true
+        b.heightAnchor.constraint(equalToConstant: 64.6).isActive = true
+        return b
+    }()
+    let advancedSearchButton: UIButton = {
+        let b = UIButton()
+        b.frame = CGRect(x: 0, y: 0, width: 64.6, height: 64.6)
+        b.addTarget(self, action: #selector(showSearchMembersPopup), for: .touchUpInside)
+        b.translatesAutoresizingMaskIntoConstraints = false
+        b.backgroundColor = CustomColors.buttonLight
+        b.setTitle("advanced\nsearch", for: .normal)
+        b.titleLabel?.numberOfLines = 2
+        b.titleLabel?.textAlignment = .center
+        b.setTitleColor(.white, for: .normal)
+        b.titleLabel?.font = UIFont.systemFont(ofSize: 11, weight: .medium)
+        b.layer.cornerRadius = 64.6 / 2
+        b.widthAnchor.constraint(equalToConstant: 64.6).isActive = true
+        b.heightAnchor.constraint(equalToConstant: 64.6).isActive = true
+        
         return b
     }()
     let welcomeTextsContainerView: UIView = {
@@ -76,24 +115,26 @@ class SearchController: UIViewController {
         let tcb = UIButton()
         tcb.addTarget(self, action: #selector(travelCheck), for: .touchUpInside)
         tcb.translatesAutoresizingMaskIntoConstraints = false
-        tcb.setFAText(prefixText: "", icon: .FASquare, postfixText: "  travel accommodation", size: 18, forState: .normal)
-        tcb.setFATitleColor(color: CustomColors.commonBlue1, forState: .normal)
+        tcb.setFAText(prefixText: "", icon: .FAHome, postfixText: "  travel accommodation", size: 16, forState: .normal,  iconSize: 24)
+        tcb.setFATitleColor(color: CustomColors.textLightGrey, forState: .normal)
         return tcb
     }()
     let search_meetCheckboxButton: UIButton = {
         let cb = UIButton()
+        
+        
         cb.addTarget(self, action: #selector(meetCheck), for: .touchUpInside)
         cb.translatesAutoresizingMaskIntoConstraints = false
-        cb.setFAText(prefixText: "", icon: .FASquare, postfixText: "  to meet up with people", size: 18, forState: .normal)
-        cb.setFATitleColor(color: CustomColors.commonBlue1, forState: .normal)
+        cb.setFAText(prefixText: "", icon: .FAUsers, postfixText: "  to meet up with people", size: 16, forState: .normal, iconSize: 20)
+        cb.setFATitleColor(color: CustomColors.textLightGrey, forState: .normal)
         return cb
     }()
     let search_dateCheckboxButton: UIButton = {
         let cb = UIButton()
         cb.addTarget(self, action: #selector(dateCheck), for: .touchUpInside)
         cb.translatesAutoresizingMaskIntoConstraints = false
-        cb.setFAText(prefixText: "", icon: .FASquare, postfixText: "  to date", size: 18, forState: .normal)
-        cb.setFATitleColor(color: CustomColors.commonBlue1, forState: .normal)
+        cb.setFAText(prefixText: "", icon: .FAHeart, postfixText: "  to date", size: 16, forState: .normal, iconSize: 20)
+        cb.setFATitleColor(color: CustomColors.textLightGrey, forState: .normal)
         return cb
     }()
     let search_discoverCheckboxButton: UIButton = {
@@ -101,7 +142,7 @@ class SearchController: UIViewController {
         cb.addTarget(self, action: #selector(discoverCheck), for: .touchUpInside)
         cb.translatesAutoresizingMaskIntoConstraints = false
         cb.setFAText(prefixText: "", icon: .FASquare, postfixText: "  to discover the city", size: 18, forState: .normal)
-        cb.setFATitleColor(color: CustomColors.commonBlue1, forState: .normal)
+        cb.setFATitleColor(color: CustomColors.textLightGrey, forState: .normal)
         return cb
     }()
     let lookingForContainerView: UIView = {
@@ -113,11 +154,12 @@ class SearchController: UIViewController {
     }()
     let searchLocTextTitle: UITextField = {
         let tt = UITextField()
-        tt.textColor = CustomColors.commonGrey1
-        tt.text = "Current search location"
+        tt.textColor = CustomColors.textGrey
+        tt.text = "Search location"
         tt.translatesAutoresizingMaskIntoConstraints = false
         tt.isUserInteractionEnabled = false
-        tt.font = .systemFont(ofSize: 18)
+        tt.font = .systemFont(ofSize: 14, weight:.medium)
+        tt.textColor = CustomColors.textGrey
         return tt
     }()
     let searchLocTextField: UITextField = {
@@ -125,24 +167,24 @@ class SearchController: UIViewController {
         tf.attributedPlaceholder = NSAttributedString(string: "...", attributes: [NSAttributedStringKey.foregroundColor: CustomColors.commonBlue1])
         tf.textColor = CustomColors.commonBlue1
         tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.font = .systemFont(ofSize: 18)
+        tf.font = .systemFont(ofSize: 16, weight: .medium)
         tf.text = "..."
         tf.addTarget(self, action: #selector(goACN), for: UIControlEvents.editingDidBegin)
         return tf
     }()
     let searchLocSeperatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = CustomColors.commonGrey1
+        view.backgroundColor = CustomColors.textGrey
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     let lookingForTitle: UITextField = {
         let tt = UITextField()
-        tt.textColor = CustomColors.commonGrey1
+        tt.textColor = CustomColors.textGrey
         tt.text = "I want"
         tt.translatesAutoresizingMaskIntoConstraints = false
         tt.isUserInteractionEnabled = false
-        tt.font = .systemFont(ofSize: 18)
+        tt.font = .systemFont(ofSize: 14, weight: .medium)
         return tt
     }()
     lazy var searchButton: UIButton = {
@@ -152,14 +194,14 @@ class SearchController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: [])
         button.layer.masksToBounds = true
-        button.layer.cornerRadius = 50
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 30)
+        button.layer.cornerRadius = 32
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .medium)
         button.addTarget(self, action: #selector(wayToSearching), for: .touchUpInside)
         return button
     }()
     let lookingForGenderTitle: UITextField = {
         let tt = UITextField()
-        tt.textColor = CustomColors.commonGrey1
+        tt.textColor = CustomColors.textGrey
         tt.text = "Options"
         tt.translatesAutoresizingMaskIntoConstraints = false
         tt.isUserInteractionEnabled = false
@@ -170,7 +212,7 @@ class SearchController: UIViewController {
         let tcb = UIButton()
         tcb.addTarget(self, action: #selector(femaleCheck), for: .touchUpInside)
         tcb.translatesAutoresizingMaskIntoConstraints = false
-        tcb.setFAText(prefixText: "", icon: .FASquare, postfixText: "  female", size: 18, forState: .normal)
+        tcb.setFAText(prefixText: "", icon: .FASquare, postfixText: "  female", size: 16, forState: .normal)
         tcb.setFATitleColor(color: CustomColors.commonBlue1, forState: .normal)
         return tcb
     }()
@@ -178,7 +220,7 @@ class SearchController: UIViewController {
         let cb = UIButton()
         cb.addTarget(self, action: #selector(maleCheck), for: .touchUpInside)
         cb.translatesAutoresizingMaskIntoConstraints = false
-        cb.setFAText(prefixText: "", icon: .FASquare, postfixText: "  male", size: 18, forState: .normal)
+        cb.setFAText(prefixText: "", icon: .FASquare, postfixText: "  male", size: 16, forState: .normal)
         cb.setFATitleColor(color: CustomColors.commonBlue1, forState: .normal)
         return cb
     }()
@@ -186,9 +228,41 @@ class SearchController: UIViewController {
         let cb = UIButton()
         cb.addTarget(self, action: #selector(bothCheck), for: .touchUpInside)
         cb.translatesAutoresizingMaskIntoConstraints = false
-        cb.setFAText(prefixText: "", icon: .FASquare, postfixText: "  both", size: 18, forState: .normal)
+        cb.setFAText(prefixText: "", icon: .FASquare, postfixText: "  both", size: 16, forState: .normal)
         cb.setFATitleColor(color: CustomColors.commonBlue1, forState: .normal)
         return cb
+    }()
+    
+    let ageText: UITextField = {
+        let tt = UITextField()
+        tt.textColor = CustomColors.textGrey
+        tt.text = "Age"
+        tt.translatesAutoresizingMaskIntoConstraints = false
+        tt.isUserInteractionEnabled = false
+        tt.font = .systemFont(ofSize: 14, weight:.medium)
+        tt.textColor = CustomColors.textGrey
+        return tt
+    }()
+    let ageCheckboxButton: RangeSeekSlider = {
+//        let cb = UIButton()
+//        cb.addTarget(self, action: #selector(ageCheck), for: .touchUpInside)
+//        cb.translatesAutoresizingMaskIntoConstraints = false
+//        cb.setFAText(prefixText: "", icon: .FASquare, postfixText: "   age", size: 16, forState: .normal)
+//        cb.setFATitleColor(color: CustomColors.commonBlue1, forState: .normal)
+//        return cb
+    
+        let slider = RangeSeekSlider(frame: .zero)
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        slider.handleColor = CustomColors.lightOrange1
+        slider.minLabelColor = CustomColors.lightOrange1
+        slider.colorBetweenHandles  = CustomColors.lightOrange1
+        slider.maxLabelColor = CustomColors.lightOrange1
+        slider.initialColor = CustomColors.textGrey
+        slider.tintColor = CustomColors.textGrey
+        slider.minValue = 0
+        slider.maxValue = 70
+        
+        return slider
     }()
     let popup: UIView = {
         let view = UIView()
@@ -220,13 +294,13 @@ class SearchController: UIViewController {
         let cb = UIButton()
         cb.addTarget(self, action: #selector(showSearchMembersPopup), for: .touchUpInside)
         cb.translatesAutoresizingMaskIntoConstraints = false
-        cb.setFAText(prefixText: "Search members   ", icon: .FASearch, postfixText: "", size: 18, forState: .normal)
-        cb.setFATitleColor(color: CustomColors.commonGrey1, forState: .normal)
+        cb.setFAText(prefixText: "Search members   ", icon: .FASearch, postfixText: "", size: 16, forState: .normal)
+        cb.setFATitleColor(color: CustomColors.textGrey, forState: .normal)
         return cb
     }()
     let searchMembersTitle: UITextField = {
         let tt = UITextField()
-        tt.textColor = CustomColors.commonGrey1
+        tt.textColor = CustomColors.textGrey
         tt.text = "Search members"
         tt.translatesAutoresizingMaskIntoConstraints = false
         tt.isUserInteractionEnabled = false
@@ -235,7 +309,7 @@ class SearchController: UIViewController {
     }()
     let ageTextTitle: UITextField = {
         let tt = UITextField()
-        tt.textColor = CustomColors.commonGrey1
+        tt.textColor = CustomColors.textGrey
         tt.text = "By age"
         tt.translatesAutoresizingMaskIntoConstraints = false
         tt.isUserInteractionEnabled = false
@@ -271,7 +345,7 @@ class SearchController: UIViewController {
     }()
     let usernameTextTitle: UITextField = {
         let tt = UITextField()
-        tt.textColor = CustomColors.commonGrey1
+        tt.textColor = CustomColors.textGrey
         tt.text = "By username"
         tt.translatesAutoresizingMaskIntoConstraints = false
         tt.isUserInteractionEnabled = false
@@ -305,7 +379,7 @@ class SearchController: UIViewController {
     }()
     let smSearchLocTextTitle: UITextField = {
         let tt = UITextField()
-        tt.textColor = CustomColors.commonGrey1
+        tt.textColor = CustomColors.textGrey
         tt.text = "Search location"
         tt.translatesAutoresizingMaskIntoConstraints = false
         tt.isUserInteractionEnabled = false
@@ -323,7 +397,7 @@ class SearchController: UIViewController {
     }()
 //    let smSearchLocSeperatorView: UIView = {
 //        let view = UIView()
-//        view.backgroundColor = CustomColors.commonGrey1
+//        view.backgroundColor = CustomColors.textGrey
 //        view.translatesAutoresizingMaskIntoConstraints = false
 //        return view
 //    }()
@@ -409,14 +483,15 @@ class SearchController: UIViewController {
     @objc func allMembersButtonCheck(){
         if isAllMembersSearching == false {
             allMembersButton.backgroundColor = CustomColors.lightOrange1
-            contactsOnlyButton.backgroundColor = CustomColors.commonGrey1
+            contactsOnlyButton.backgroundColor = CustomColors.buttonInactive
             isAllMembersSearching = true
         }
     }
     @objc func contactsOnlyButtonCheck(){
         if isAllMembersSearching == true {
+            contactsOnlyButton.isSelected = true
             contactsOnlyButton.backgroundColor = CustomColors.lightOrange1
-            allMembersButton.backgroundColor = CustomColors.commonGrey1
+            allMembersButton.backgroundColor = CustomColors.buttonInactive
             isAllMembersSearching = false
         }
     }
@@ -424,24 +499,37 @@ class SearchController: UIViewController {
     @objc func femaleCheck(){
         checkIfYouAreBanned()
         femaleCheckboxButton.setFATitleColor(color: CustomColors.lightOrange1, forState: .normal)
-        maleCheckboxButton.setFATitleColor(color: CustomColors.commonBlue1, forState: .normal)
-        bothCheckboxButton.setFATitleColor(color: CustomColors.commonBlue1, forState: .normal)
+        maleCheckboxButton.setFATitleColor(color: CustomColors.textLightGrey, forState: .normal)
+        bothCheckboxButton.setFATitleColor(color: CustomColors.textLightGrey, forState: .normal)
+//        ageCheckboxButton.setFATitleColor(color: CustomColors.textLightGrey, forState: .normal)
         search_sex = "female"
     }
     @objc func maleCheck(){
         checkIfYouAreBanned()
-        femaleCheckboxButton.setFATitleColor(color: CustomColors.commonBlue1, forState: .normal)
+        femaleCheckboxButton.setFATitleColor(color: CustomColors.textLightGrey, forState: .normal)
         maleCheckboxButton.setFATitleColor(color: CustomColors.lightOrange1, forState: .normal)
-        bothCheckboxButton.setFATitleColor(color: CustomColors.commonBlue1, forState: .normal)
+        bothCheckboxButton.setFATitleColor(color: CustomColors.textLightGrey, forState: .normal)
+//        ageCheckboxButton.setFATitleColor(color: CustomColors.textLightGrey, forState: .normal)
         search_sex = "male"
     }
     @objc func bothCheck(){
         checkIfYouAreBanned()
-        femaleCheckboxButton.setFATitleColor(color: CustomColors.commonBlue1, forState: .normal)
-        maleCheckboxButton.setFATitleColor(color: CustomColors.commonBlue1, forState: .normal)
+        femaleCheckboxButton.setFATitleColor(color: CustomColors.textLightGrey, forState: .normal)
+        maleCheckboxButton.setFATitleColor(color: CustomColors.textLightGrey, forState: .normal)
         bothCheckboxButton.setFATitleColor(color: CustomColors.lightOrange1, forState: .normal)
+//        ageCheckboxButton.setFATitleColor(color: CustomColors.textLightGrey, forState: .normal)
         search_sex = "both"
     }
+   
+//    @objc func ageCheck(){
+//        checkIfYouAreBanned()
+//        femaleCheckboxButton.setFATitleColor(color: CustomColors.textLightGrey, forState: .normal)
+//        maleCheckboxButton.setFATitleColor(color: CustomColors.textLightGrey, forState: .normal)
+//        bothCheckboxButton.setFATitleColor(color: CustomColors.textLightGrey, forState: .normal)
+//        ageCheckboxButton.setFATitleColor(color: CustomColors.lightOrange1, forState: .normal)
+//        search_sex = "age"
+//    }
+    
     @objc func checkIfAnyChecked(phone: String) {
         if travelChecked == true || meetChecked == true || dateChecked == true || discoverChecked == true {
             if phone == "old" {
@@ -449,7 +537,7 @@ class SearchController: UIViewController {
             } else if phone == "new" {
                 takeSearchResults()
             }
-            lookingForTitle.textColor = CustomColors.commonGrey1
+            lookingForTitle.textColor = CustomColors.textGrey
         } else {
             let alert = UIAlertController(title: "Please choose at least one option", message: nil, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -503,6 +591,9 @@ class SearchController: UIViewController {
         let uid = Auth.auth().currentUser!.uid
         let blacklistRef = Database.database().reference().child("users-blacklists").child(uid)
         let smLoc = smSearchLocTextField.text
+        
+        let location = self.searchLocTextField.text
+        
         blacklistRef.observeSingleEvent(of: .value) { (snap) in
             let snapshot = snap.children.allObjects as! [DataSnapshot]
             for blockedUser in snapshot {
@@ -652,7 +743,7 @@ class SearchController: UIViewController {
                             if self.sortMethod == "active" {
                                 if isActive != nil && disconectTime != nil {
                                     if isActive == true {
-                                        search_result.priority = 99999999999999
+                                        search_result.priority = 999999999
                                     } else {
                                         search_result.priority = disconectTime
                                     }
@@ -700,7 +791,7 @@ class SearchController: UIViewController {
                         }
                         self.localFL = shuffled
                     }
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "sendLocalFL"), object: nil, userInfo: ["dict": self.localFL])
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "sendLocalFL"), object: nil, userInfo: ["dict": self.localFL, "location" : location ?? ""])
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
 //                    print("friendslineArray \(friendslineArray)")
 //                    UserDefaults.standard.set(friendslineArray, forKey: "arrayOfYourFriendsline")
@@ -725,7 +816,7 @@ class SearchController: UIViewController {
                         UserDefaults.standard.set(nil, forKey: "arrayOfYourFriendsline")
                         self.present(InviteFriendsController(), animated: false, completion: nil)
                     }
-                    self.callIndex(selectedIndex: 1)
+                    self.callIndex(selectedIndex: 0)
                     self.searchMembers.text = ""
                     self.usernameSearchMembers.text = ""
                     self.fromSearchMembers = false
@@ -743,7 +834,7 @@ class SearchController: UIViewController {
     @objc func travelCheck(){
         var color = UIColor()
         if travelChecked == true {
-            color = CustomColors.commonBlue1
+            color = CustomColors.textLightGrey
             travelChecked = false
         } else {
             color = CustomColors.lightOrange1
@@ -755,7 +846,7 @@ class SearchController: UIViewController {
     @objc func meetCheck(){
         var color = UIColor()
         if meetChecked == true {
-            color = CustomColors.commonBlue1
+            color = CustomColors.textLightGrey
             meetChecked = false
         } else {
             color = CustomColors.lightOrange1
@@ -767,7 +858,7 @@ class SearchController: UIViewController {
     @objc func dateCheck(){
         var color = UIColor()
         if dateChecked == true {
-            color = CustomColors.commonBlue1
+            color = CustomColors.textLightGrey
             dateChecked = false
 //            popup.isHidden = true
         } else {
@@ -781,7 +872,7 @@ class SearchController: UIViewController {
     @objc func discoverCheck(){
         var color = UIColor()
         if discoverChecked == true {
-            color = CustomColors.commonBlue1
+            color = CustomColors.textLightGrey
             discoverChecked = false
             //            popup.isHidden = true
         } else {
@@ -798,6 +889,8 @@ class SearchController: UIViewController {
         getCurentSettings()
         view.backgroundColor = UIColor.white
         view.addSubview(welcomeTextsContainerView)
+        
+        setupControls()
         setupNavBarItems()
         textsContainerSetup()
         lookingForSetupContainerView()
@@ -805,6 +898,9 @@ class SearchController: UIViewController {
         checkIfYouAreBanned()
         searchMembersPopupSetup()
         optionsContainerSetup()
+        
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(getCurentSettings), name: NSNotification.Name(rawValue: "newSignin"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(getCurentSettings), name: NSNotification.Name(rawValue: "reloadMyProfile"), object: nil)
     }
@@ -874,6 +970,27 @@ class SearchController: UIViewController {
     }
     
     func setupNavBarItems(){
+        
+        
+        let mfrImageView: UIImageView = {
+            let imageView = UIImageView()
+            imageView.contentMode = .center
+            imageView.image = UIImage(named: "myfriendsroomlogoSmall")
+            //    imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.layer.masksToBounds = true
+            return imageView
+        }()
+        
+        // Setup navigation bar
+        if let navigationBar = self.navigationController?.navigationBar {
+            navigationBar.shadowImage = UIImage()
+            navigationBar.isTranslucent = false
+            navigationBar.barTintColor = UIColor.white
+        }
+        navigationItem.titleView?.backgroundColor = .white
+        self.navigationItem.titleView = mfrImageView
+        
+        
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : CustomColors.lightOrange1]
         self.navigationItem.title = "Search"
         let dotmenuImage = UIImage(named: "dotmenu")?.withRenderingMode(.alwaysOriginal)
@@ -908,10 +1025,10 @@ class SearchController: UIViewController {
         searchMembersPopup.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         searchMembersPopup.isHidden = true
         
-        searchMembersTitle.centerXAnchor.constraint(equalTo: welcomeTextsContainerView.centerXAnchor).isActive = true
-        searchMembersTitle.topAnchor.constraint(equalTo: welcomeTextsContainerView.topAnchor).isActive = true
+        searchMembersTitle.centerXAnchor.constraint(equalTo: searchMembersPopup.centerXAnchor).isActive = true
+        searchMembersTitle.topAnchor.constraint(equalTo: searchMembersPopup.topAnchor).isActive = true
         searchMembersTitle.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        searchMembersTitle.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        searchMembersTitle.heightAnchor.constraint(equalToConstant: 0).isActive = true
         
         nameTextTitle.centerXAnchor.constraint(equalTo: searchMembersPopup.centerXAnchor).isActive = true
         nameTextTitle.topAnchor.constraint(equalTo: searchMembersTitle.bottomAnchor, constant: 20).isActive = true
@@ -991,7 +1108,7 @@ class SearchController: UIViewController {
         cb.translatesAutoresizingMaskIntoConstraints = false
         cb.setTitle("Active", for: .normal)
         cb.backgroundColor = UIColor.lightGray
-        cb.setTitleColor(CustomColors.commonGrey1, for: .normal)
+        cb.setTitleColor(CustomColors.textGrey, for: .normal)
         cb.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         return cb
     }()
@@ -1007,7 +1124,7 @@ class SearchController: UIViewController {
         cb.translatesAutoresizingMaskIntoConstraints = false
         cb.setTitle("Sign up date", for: .normal)
         cb.backgroundColor = UIColor.white
-        cb.setTitleColor(CustomColors.commonGrey1, for: .normal)
+        cb.setTitleColor(CustomColors.textGrey, for: .normal)
         cb.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         return cb
     }()
@@ -1023,13 +1140,13 @@ class SearchController: UIViewController {
         cb.translatesAutoresizingMaskIntoConstraints = false
         cb.setTitle("Random", for: .normal)
         cb.backgroundColor = UIColor.white
-        cb.setTitleColor(CustomColors.commonGrey1, for: .normal)
+        cb.setTitleColor(CustomColors.textGrey, for: .normal)
         cb.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         return cb
     }()
     let sortMembersTitle: UITextField = {
         let tt = UITextField()
-        tt.textColor = CustomColors.commonGrey1
+        tt.textColor = CustomColors.textGrey
         tt.text = "  Sort members by:"
         tt.translatesAutoresizingMaskIntoConstraints = false
         tt.isUserInteractionEnabled = false
@@ -1064,8 +1181,8 @@ class SearchController: UIViewController {
         optionsContainer.addSubview(sortResultsRandomSeperatorView)
         optionsContainer.addSubview(sortResultsRandom)
         
-        optionsContainer.rightAnchor.constraint(equalTo: welcomeTextsContainerView.rightAnchor).isActive = true
-        optionsContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 64).isActive = true
+        optionsContainer.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        optionsContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
         optionsContainer.widthAnchor.constraint(equalToConstant: 200).isActive = true
         optionsContainer.heightAnchor.constraint(equalToConstant: 197).isActive = true
         optionsContainer.isHidden = true
@@ -1105,64 +1222,158 @@ class SearchController: UIViewController {
         sortResultsRandom.widthAnchor.constraint(equalTo: optionsContainer.widthAnchor).isActive = true
         sortResultsRandom.heightAnchor.constraint(equalToConstant: 48).isActive = true
     }
-    func textsContainerSetup(){
-//        welcomeTextsContainerView.addSubview(welcomeTitle)
-        welcomeTextsContainerView.addSubview(searchMembersButton)
-        welcomeTextsContainerView.addSubview(allMembersButton)
-        welcomeTextsContainerView.addSubview(contactsOnlyButton)
-        welcomeTextsContainerView.addSubview(searchLocTextTitle)
-        welcomeTextsContainerView.addSubview(searchLocTextField)
-        welcomeTextsContainerView.addSubview(searchLocSeperatorView)
-        welcomeTextsContainerView.addSubview(searchButton)
+    
+    func setupControls() {
         
-        welcomeTextsContainerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
-        welcomeTextsContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        welcomeTextsContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        welcomeTextsContainerView.heightAnchor.constraint(equalToConstant: 310).isActive = true
+        let stackContainer = UIView()
+        stackContainer.translatesAutoresizingMaskIntoConstraints = false
+        stackContainer.backgroundColor = CustomColors.almostWhite
+        stackContainer.addSubview(topStackView)
+        view.addSubview(stackContainer)
         
-//        welcomeTitle.centerXAnchor.constraint(equalTo: welcomeTextsContainerView.centerXAnchor).isActive = true
-//        welcomeTitle.topAnchor.constraint(equalTo: welcomeTextsContainerView.topAnchor).isActive = true
-//        welcomeTitle.widthAnchor.constraint(equalToConstant: 90).isActive = true
-//        welcomeTitle.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
-        searchMembersButton.centerXAnchor.constraint(equalTo: welcomeTextsContainerView.centerXAnchor).isActive = true
-        searchMembersButton.topAnchor.constraint(equalTo: welcomeTextsContainerView.topAnchor, constant: 60).isActive = true
-        searchMembersButton.widthAnchor.constraint(equalToConstant: 290).isActive = true
-        searchMembersButton.heightAnchor.constraint(equalToConstant: 21).isActive = true
+        NSLayoutConstraint.activate([
+            // Stack container
+            view.topAnchor.constraint(equalTo: stackContainer.topAnchor),
+            view.leadingAnchor.constraint(equalTo: stackContainer.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: stackContainer.trailingAnchor),
+            stackContainer.heightAnchor.constraint(equalToConstant: 91),
+            
+            // Stack
+            stackContainer.centerXAnchor.constraint(equalTo: topStackView.centerXAnchor),
+            stackContainer.centerYAnchor.constraint(equalTo: topStackView.centerYAnchor),
+            
+        ])
         
-        allMembersButton.topAnchor.constraint(equalTo: searchMembersButton.bottomAnchor, constant: 20).isActive = true
-        allMembersButton.widthAnchor.constraint(equalToConstant: 147).isActive = true
-        allMembersButton.rightAnchor.constraint(equalTo: welcomeTextsContainerView.centerXAnchor, constant: -1).isActive = true
-        allMembersButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        
-        contactsOnlyButton.topAnchor.constraint(equalTo: allMembersButton.topAnchor).isActive = true
-        contactsOnlyButton.leftAnchor.constraint(equalTo: welcomeTextsContainerView.centerXAnchor, constant: 1).isActive = true
-        contactsOnlyButton.widthAnchor.constraint(equalToConstant: 147).isActive = true
-        contactsOnlyButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        
-        searchLocTextTitle.centerXAnchor.constraint(equalTo:  welcomeTextsContainerView.centerXAnchor, constant: 3).isActive = true
-        searchLocTextTitle.topAnchor.constraint(equalTo: allMembersButton.bottomAnchor, constant: 15).isActive = true
-        searchLocTextTitle.widthAnchor.constraint(equalToConstant: 290).isActive = true
-        searchLocTextTitle.heightAnchor.constraint(equalToConstant: 21).isActive = true
-        
-        searchLocTextField.centerXAnchor.constraint(equalTo:  welcomeTextsContainerView.centerXAnchor, constant: 12).isActive = true
-        searchLocTextField.topAnchor.constraint(equalTo: searchLocTextTitle.bottomAnchor, constant: 10).isActive = true
-        searchLocTextField.widthAnchor.constraint(equalToConstant: 290).isActive = true
-        searchLocTextField.heightAnchor.constraint(equalToConstant: 21).isActive = true
-        
-        searchLocSeperatorView.leftAnchor.constraint(equalTo:  searchLocTextField.leftAnchor, constant: -4).isActive = true
-        searchLocSeperatorView.topAnchor.constraint(equalTo: searchLocTextField.topAnchor, constant: 1).isActive = true
-        searchLocSeperatorView.widthAnchor.constraint(equalToConstant: 1).isActive = true
-        searchLocSeperatorView.heightAnchor.constraint(equalToConstant: 21).isActive = true
-        
-        searchButton.centerXAnchor.constraint(equalTo: welcomeTextsContainerView.centerXAnchor).isActive = true
-        searchButton.topAnchor.constraint(equalTo: searchLocTextField.topAnchor, constant: 30).isActive = true
-        searchButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        searchButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
+    func textsContainerSetup(){
+        
+        welcomeTextsContainerView.addSubview(searchLocTextTitle)
+        welcomeTextsContainerView.addSubview(searchLocTextField)
+        
+        
+        welcomeTextsContainerView.addSubview(lookingForTitle)
+        welcomeTextsContainerView.addSubview(search_travelCheckboxButton)
+        welcomeTextsContainerView.addSubview(search_meetCheckboxButton)
+        welcomeTextsContainerView.addSubview(search_dateCheckboxButton)
+       // welcomeTextsContainerView.addSubview(search_discoverCheckboxButton) maybe turned off
+        
+        welcomeTextsContainerView.addSubview(femaleCheckboxButton)
+        welcomeTextsContainerView.addSubview(maleCheckboxButton)
+        welcomeTextsContainerView.addSubview(bothCheckboxButton)
+        
+        welcomeTextsContainerView.addSubview(ageText)
+        welcomeTextsContainerView.addSubview(ageCheckboxButton)
+       // Age min, Age max
+        
+        
+        welcomeTextsContainerView.addSubview(searchButton)
+        
+        
+        
+        NSLayoutConstraint.activate([
+            
+            // Welcome container (AKA search fields)
+            welcomeTextsContainerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 120),
+            view.centerXAnchor.constraint(equalTo: welcomeTextsContainerView.centerXAnchor),
+            // Automatic height welcomeTextsContainerView.heightAnchor.constraint(equalToConstant: 82),
+            welcomeTextsContainerView.widthAnchor.constraint(equalToConstant: 224),
+            welcomeTextsContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            
+            // Search label
+            welcomeTextsContainerView.leadingAnchor.constraint(equalTo: searchLocTextTitle.leadingAnchor),
+            welcomeTextsContainerView.trailingAnchor.constraint(equalTo: searchLocTextTitle.trailingAnchor),
+            welcomeTextsContainerView.topAnchor.constraint(equalTo: searchLocTextTitle.topAnchor),
+            searchLocTextTitle.heightAnchor.constraint(equalToConstant: 21),
+            
+            
+            // Search field
+            welcomeTextsContainerView.leadingAnchor.constraint(equalTo: searchLocTextTitle.leadingAnchor),
+            welcomeTextsContainerView.trailingAnchor.constraint(equalTo: searchLocTextTitle.trailingAnchor),
+            searchLocTextField.topAnchor.constraint(equalTo: searchLocTextTitle.bottomAnchor, constant: 6),
+            searchLocTextField.heightAnchor.constraint(equalToConstant: 21),
+            
+            
+            // I want
+            welcomeTextsContainerView.leadingAnchor.constraint(equalTo: lookingForTitle.leadingAnchor),
+            welcomeTextsContainerView.trailingAnchor.constraint(equalTo: lookingForTitle.trailingAnchor),
+            lookingForTitle.topAnchor.constraint(equalTo: searchLocTextField.bottomAnchor, constant: 30),
+            searchLocTextField.heightAnchor.constraint(equalToConstant: 21),
+            
+            // Travel
+            welcomeTextsContainerView.leadingAnchor.constraint(equalTo: lookingForTitle.leadingAnchor),
+            welcomeTextsContainerView.trailingAnchor.constraint(equalTo: lookingForTitle.trailingAnchor),
+            search_travelCheckboxButton.topAnchor.constraint(equalTo: lookingForTitle.bottomAnchor, constant: 8),
+            search_travelCheckboxButton.heightAnchor.constraint(equalToConstant: 24),
+            
+            // Meet
+            welcomeTextsContainerView.leadingAnchor.constraint(equalTo: lookingForTitle.leadingAnchor),
+            welcomeTextsContainerView.trailingAnchor.constraint(equalTo: lookingForTitle.trailingAnchor),
+            search_meetCheckboxButton.topAnchor.constraint(equalTo: search_travelCheckboxButton.bottomAnchor, constant: 16),
+            search_meetCheckboxButton.heightAnchor.constraint(equalToConstant: 24),
+            
+            // Date
+            welcomeTextsContainerView.leadingAnchor.constraint(equalTo: lookingForTitle.leadingAnchor),
+            welcomeTextsContainerView.trailingAnchor.constraint(equalTo: lookingForTitle.trailingAnchor),
+            search_dateCheckboxButton.topAnchor.constraint(equalTo: search_meetCheckboxButton.bottomAnchor, constant: 14),
+            search_dateCheckboxButton.heightAnchor.constraint(equalToConstant: 24),
+            
+            // Female
+            welcomeTextsContainerView.leadingAnchor.constraint(equalTo: femaleCheckboxButton.leadingAnchor),
+            femaleCheckboxButton.topAnchor.constraint(equalTo: search_dateCheckboxButton.bottomAnchor, constant: 29),
+            femaleCheckboxButton.heightAnchor.constraint(equalToConstant: 21),
+            
+            // Male
+            maleCheckboxButton.leadingAnchor.constraint(equalTo: femaleCheckboxButton.trailingAnchor, constant: 15),
+            maleCheckboxButton.topAnchor.constraint(equalTo: femaleCheckboxButton.topAnchor),
+            maleCheckboxButton.heightAnchor.constraint(equalToConstant: 21),
+            
+            // Both
+            bothCheckboxButton.leadingAnchor.constraint(equalTo: maleCheckboxButton.trailingAnchor, constant: 15),
+            bothCheckboxButton.topAnchor.constraint(equalTo: femaleCheckboxButton.topAnchor, constant: 0),
+            bothCheckboxButton.heightAnchor.constraint(equalToConstant: 21),
+        
+            
+            
+            // Age
+            ageText.leadingAnchor.constraint(equalTo: welcomeTextsContainerView.leadingAnchor),
+            ageText.topAnchor.constraint(equalTo: bothCheckboxButton.bottomAnchor, constant: 18),
+            ageText.heightAnchor.constraint(equalToConstant: 18),
+            
+            ageCheckboxButton.leadingAnchor.constraint(equalTo: welcomeTextsContainerView.leadingAnchor),
+            ageCheckboxButton.trailingAnchor.constraint(equalTo: welcomeTextsContainerView.trailingAnchor),
+            ageCheckboxButton.topAnchor.constraint(equalTo: ageText.bottomAnchor, constant: 6),
+            ageCheckboxButton.heightAnchor.constraint(equalToConstant: 21),
+
+            
+            // Search
+            welcomeTextsContainerView.centerXAnchor.constraint(equalTo: searchButton.centerXAnchor),
+          //  searchButton.topAnchor.constraint(equalTo: ageCheckboxButton.bottomAnchor, constant: 29),
+            searchButton.widthAnchor.constraint(equalToConstant: 64),
+            searchButton.heightAnchor.constraint(equalToConstant: 64),
+            
+            
+            // Final element constraint to view
+            welcomeTextsContainerView.bottomAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 20)
+        ])
+        
+        
+    
+        
+    }
+    
+    
+    
+    
     func lookingForSetupContainerView(){
+    
+        
         view.addSubview(lookingForContainerView)
+        lookingForContainerView.isHidden = true
+        
+        return;
         lookingForContainerView.addSubview(lookingForTitle)
         lookingForContainerView.addSubview(search_travelCheckboxButton)
         lookingForContainerView.addSubview(search_meetCheckboxButton)
@@ -1205,6 +1416,8 @@ class SearchController: UIViewController {
     }
     func optionsContainerViewSetup(){
         view.addSubview(optionsContainerView)
+        optionsContainerView.isHidden = true
+        return;
 //        optionsContainerView.addSubview(lookingForGenderTitle)
         optionsContainerView.addSubview(femaleCheckboxButton)
         optionsContainerView.addSubview(maleCheckboxButton)

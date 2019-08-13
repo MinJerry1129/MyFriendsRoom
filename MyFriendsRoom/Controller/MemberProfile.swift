@@ -11,6 +11,7 @@ import UIKit
 import Firebase
 import Alamofire
 
+
 //var imagesURLSArray = [String]()
 //var profileImagesURLSArray = [String]()
 //var albumSelected = String()
@@ -44,240 +45,18 @@ class MemberProfileController: UIViewController {
     var userWasDeleted = false
     var youAreBanned = false
     
-    let mfrContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.masksToBounds = true
-        return view
-    }()
-    let mfrImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "profile")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.masksToBounds = true
-        return imageView
-    }()
-    let mfrMyTitle: UITextView = {
-        let tt = UITextView()
-        let attributedStr = NSMutableAttributedString.init(string: "MyFriendsRoom")
-        attributedStr.addAttribute(.foregroundColor, value: CustomColors.commonGrey1, range: NSRange(location: 0, length: 13))
-        attributedStr.addAttribute(.foregroundColor, value: CustomColors.commonBlue1, range: NSRange(location: 2, length: 7))
-        tt.attributedText = attributedStr
-        tt.font = .systemFont(ofSize: 25)
-        tt.translatesAutoresizingMaskIntoConstraints = false
-        tt.isUserInteractionEnabled = false
-        return tt
-    }()
-    let profileAvatarContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.masksToBounds = true
-        return view
-    }()
-    let profileAvatarView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "emptyavatar")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.masksToBounds = true
-        imageView.contentMode = .scaleAspectFill
-//        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(seeMemberProfileImages)))
-        return imageView
-    }()
-    let lastProfileImageView: UIImageView = {
-       let img = UIImageView()
-        img.image = UIImage(named: "emptyavatar")
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.layer.masksToBounds = true
-        img.contentMode = .scaleAspectFill
-        return img
-    }()
-    let friendshipActionButton: UIButton = {
-        let cb = UIButton()
-        cb.addTarget(self, action: #selector(friendshipAction), for: .touchUpInside)
-        cb.translatesAutoresizingMaskIntoConstraints = false
-        cb.setTitle("add to friends", for: .normal)
-        cb.backgroundColor = UIColor.clear
-        cb.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        cb.tintColor = CustomColors.commonBlue1
-        return cb
-    }()
-    let scrollView: UIScrollView = {
-        let sv = UIScrollView()
-        sv.backgroundColor = UIColor.white
-        sv.translatesAutoresizingMaskIntoConstraints = false
-        sv.layer.masksToBounds = true
-        return sv
-    }()
-    let addToWishlistButton: UIButton = {
-        let cb = UIButton()
-        cb.addTarget(self, action: #selector(addToWishlist), for: .touchUpInside)
-        cb.translatesAutoresizingMaskIntoConstraints = false
-        cb.setTitle("LIKE", for: .normal)
-        cb.backgroundColor = CustomColors.lightOrange1
-        cb.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        return cb
-    }()
-    let contactButton: UIButton = {
-        let cb = UIButton()
-        cb.addTarget(self, action: #selector(contactMember), for: .touchUpInside)
-        cb.translatesAutoresizingMaskIntoConstraints = false
-        cb.setTitle("CONTACT", for: .normal)
-        cb.backgroundColor = CustomColors.commonGrey1
-        cb.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        return cb
-    }()
-    let memberPropsContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.masksToBounds = true
-        return view
-    }()
-    let backButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("<", for: .normal)
-        button.setFATitleColor(color: CustomColors.commonGrey1)
-        button.titleLabel?.font = .systemFont(ofSize: 45)
-        button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        return button
-    }()
-    let memberNameAndAge: UITextView = {
-        let tt = UITextView()
-        tt.isUserInteractionEnabled = false
-        tt.translatesAutoresizingMaskIntoConstraints = false
-        tt.text = "%Username% 00"
-        tt.textColor = CustomColors.commonGrey1
-        tt.font = .boldSystemFont(ofSize: 22)
-        return tt
-    }()
-    let friendText: UITextField = {
-        let tt = UITextField()
-        tt.textColor = CustomColors.commonGrey1
-        tt.translatesAutoresizingMaskIntoConstraints = false
-        tt.isUserInteractionEnabled = false
-        tt.font = .boldSystemFont(ofSize: 15)
-//        tt.textAlignment = .right
-        return tt
-    }()
-    let activity: UITextView = {
-        let tt = UITextView()
-        tt.textColor = CustomColors.commonBlue1
-        tt.translatesAutoresizingMaskIntoConstraints = false
-        tt.isUserInteractionEnabled = false
-        tt.text = "Activity"
-        tt.font = .systemFont(ofSize: 13)
-        return tt
-    }()
-    let occupationText: UITextView = {
-        let tt = UITextView()
-        tt.textColor = CustomColors.commonBlue1
-        tt.text = "%user_occupation%"
-        tt.translatesAutoresizingMaskIntoConstraints = false
-        tt.isUserInteractionEnabled = false
-        tt.font = .systemFont(ofSize: 16)
-        return tt
-    }()
-    let currentLocationView: UITextView = {
-        let tt = UITextView()
-        tt.textColor = CustomColors.commonGrey1
-        tt.text = "Current:"
-        tt.translatesAutoresizingMaskIntoConstraints = false
-        tt.isUserInteractionEnabled = false
-        tt.font = .systemFont(ofSize: 16)
-        return tt
-    }()
-    let homeLocationView: UITextView = {
-        let tt = UITextView()
-        tt.textColor = CustomColors.commonGrey1
-        tt.text = "Home"
-        tt.translatesAutoresizingMaskIntoConstraints = false
-        tt.isUserInteractionEnabled = false
-        tt.font = .systemFont(ofSize: 16)
-        return tt
-    }()
-    let accepingGuestsTextView: UITextView = {
-        let tt = UITextView()
-        tt.textColor = CustomColors.lightOrange1
-        tt.text = "..."
-        tt.translatesAutoresizingMaskIntoConstraints = false
-        tt.isUserInteractionEnabled = false
-        tt.font = .systemFont(ofSize: 16)
-        return tt
-    }()
-    let meetingUpTextView: UITextView = {
-        let tt = UITextView()
-        tt.textColor = CustomColors.lightOrange1
-        tt.text = "..."
-        tt.translatesAutoresizingMaskIntoConstraints = false
-        tt.isUserInteractionEnabled = false
-        tt.font = .systemFont(ofSize: 16)
-        return tt
-    }()
-    let datingTextView: UITextView = {
-        let tt = UITextView()
-        tt.textColor = CustomColors.lightOrange1
-        tt.text = "..."
-        tt.translatesAutoresizingMaskIntoConstraints = false
-        tt.isUserInteractionEnabled = false
-        tt.font = .systemFont(ofSize: 16)
-        return tt
-    }()
-    let aboutMyServicesTextTitle: UITextField = {
-        let tt = UITextField()
-        tt.textColor = CustomColors.commonGrey1
-        tt.text = "About my services"
-        tt.translatesAutoresizingMaskIntoConstraints = false
-        tt.isUserInteractionEnabled = false
-        tt.font = .boldSystemFont(ofSize: 16)
-        return tt
-    }()
-    let aboutServicesTextView: UITextView = {
-        let tt = UITextView()
-        tt.text = "tell us about your services"
-        tt.translatesAutoresizingMaskIntoConstraints = false
-        tt.textColor = CustomColors.commonGrey1
-        tt.font = .systemFont(ofSize: 15)
-        return tt
-    }()
-    let aboutMeTextTitle: UITextField = {
-        let tt = UITextField()
-        tt.textColor = CustomColors.commonGrey1
-        tt.text = "About me"
-        tt.translatesAutoresizingMaskIntoConstraints = false
-        tt.isUserInteractionEnabled = false
-        tt.font = .boldSystemFont(ofSize: 16)
-        return tt
-    }()
-    let aboutMeTextView: UITextView = {
-        let tt = UITextView()
-//        tt.placeholder = "tell us about yourself"
-        tt.translatesAutoresizingMaskIntoConstraints = false
-        tt.textColor = CustomColors.commonGrey1
-        tt.isUserInteractionEnabled = false
-        tt.font = .systemFont(ofSize: 15)
-        return tt
-    }()
-    let aboutMyPlaceTextTitle: UITextField = {
-        let tt = UITextField()
-        tt.textColor = CustomColors.commonGrey1
-        tt.text = "About my place"
-        tt.translatesAutoresizingMaskIntoConstraints = false
-        tt.isUserInteractionEnabled = false
-        tt.font = .boldSystemFont(ofSize: 16)
-        return tt
-    }()
-    let aboutMyPlaceTextView: UITextView = {
-        let tt = UITextView()
-//        tt.placeholder = "tell us about your place"
-        tt.translatesAutoresizingMaskIntoConstraints = false
-        tt.textColor = CustomColors.commonGrey1
-        tt.isUserInteractionEnabled = false
-        tt.font = .systemFont(ofSize: 15)
-        return tt
-    }()
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var profileAvatarView: UIImageView!
+    @IBOutlet weak var connectionIndicatorLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var contactButton: UIButton!
+    @IBOutlet weak var friendshipActionButton: UIButton!
+    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var albumCollectionView: UICollectionView!
+    
+
+    
     let optionsContainer: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
@@ -313,6 +92,98 @@ class MemberProfileController: UIViewController {
         cb.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         return cb
     }()
+    
+    
+    
+    // MARK: - Data
+    
+    func getImagesURLSArray(){
+        imagesURLSArray = []
+        profileImagesURLSArray = []
+        let ref = Database.database().reference().child("user-apartments-images").child(goToControllerByMemberUid!)
+        ref.observeSingleEvent(of: .value) { (snap) in
+            for child in snap.children.allObjects as! [DataSnapshot]{
+                let imageURL = child.value as! String
+                self.imagesURLSArray.insert(imageURL, at: 0)
+            }
+            // OK there is something here
+            
+            
+            // This triggers refresh
+        }
+        let pref = Database.database().reference().child("user-profile-images").child(goToControllerByMemberUid!)
+        pref.observeSingleEvent(of: .value) { (prsnap) in
+            print("prsnap: ",prsnap)
+            var snapshotValueExist = false
+            for prchild in prsnap.children.allObjects as! [DataSnapshot]{
+                snapshotValueExist = true
+                let imageURL = prchild.value as! String
+                self.profileImagesURLSArray.insert(imageURL, at: 0)
+            }
+            print("snapshotValueExist: ", snapshotValueExist)
+            if snapshotValueExist == false {
+                self.profileImagesURLSArray.insert(self.profileImageUrlG!, at: 0)
+            }
+            
+            
+            // This triggers refresh
+            
+            DispatchQueue.main.async {
+                self.albumCollectionView.reloadData()
+                /*
+                var frame = self.webView.frame
+                frame.size = self.webView.scrollView.contentSize
+                self.webView.frame = frame
+                
+                
+                var contentRect = CGRect.zero
+                
+                for view in self.scrollView.subviews {
+                    contentRect = contentRect.union(view.frame)
+                }
+                self.scrollView.contentSize = contentRect.size*/
+            }
+        }
+    }
+    
+    
+    // MARK: Actions
+    
+    @objc func seeMemberImages(){
+        checkIfYouAreBanned()
+        print("go to galery")
+        //        albumSelected = "home"
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let memberPhotos = MemberPhotosController(collectionViewLayout: layout)
+        memberPhotos.picsArray = imagesURLSArray
+        let memberPhotosNav = UINavigationController(rootViewController: memberPhotos)
+        self.present(memberPhotosNav, animated: true, completion: nil)
+        //        self.present(memberPhotos, animated: true, completion: nil)
+        //        self.navigationController?.pushViewController(memberPhotos, animated: true)
+    }
+    @objc func seeMemberProfileImages(){
+        checkIfYouAreBanned()
+        print("go to galery")
+        if profileImagesURLSArray.count > 0 {
+            //            albumSelected = "profile"
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            let memberPhotos = MemberPhotosController(collectionViewLayout: layout)
+            memberPhotos.picsArray = profileImagesURLSArray
+            let memberPhotosNav = UINavigationController(rootViewController: memberPhotos)
+            self.present(memberPhotosNav, animated: true, completion: nil)
+            //            self.present(memberPhotos, animated: true, completion: nil)
+            //            self.navigationController?.pushViewController(memberPhotos, animated: true)
+        }
+    }
+    
+    
+    
+    
+    
+    // MARK: Some actions about user not existing
+    
     func checkIfYouAreBanned() {
         let uid = Auth.auth().currentUser?.uid
         let ref = Database.database().reference().child("users").child(uid!).child("wasDeleted")
@@ -336,9 +207,6 @@ class MemberProfileController: UIViewController {
             }
         }
     }
-//    func getLastActivity(){
-//        Auth.auth().use
-//    }
     @objc func addToBalcklistAction(){
         let uid = Auth.auth().currentUser?.uid
         if inBlacklist == false {
@@ -363,7 +231,6 @@ class MemberProfileController: UIViewController {
 //                self.friendText.isHidden = true
                 
                 self.friendTextHeightAnchor?.isActive = false
-                self.friendTextHeightAnchor = self.friendText.heightAnchor.constraint(equalToConstant: 0)
                 self.friendTextHeightAnchor?.isActive = true
                 self.setFriendshipStatus()
             }))
@@ -383,47 +250,9 @@ class MemberProfileController: UIViewController {
         }))
         self.present(alert, animated: true)
     }
-    @objc func seeMemberImages(){
-        checkIfYouAreBanned()
-        print("go to galery")
-//        albumSelected = "home"
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let memberPhotos = MemberPhotosController(collectionViewLayout: layout)
-        memberPhotos.picsArray = imagesURLSArray
-        let memberPhotosNav = UINavigationController(rootViewController: memberPhotos)
-        self.present(memberPhotosNav, animated: true, completion: nil)
-//        self.present(memberPhotos, animated: true, completion: nil)
-//        self.navigationController?.pushViewController(memberPhotos, animated: true)
-    }
-    @objc func seeMemberProfileImages(){
-        checkIfYouAreBanned()
-        print("go to galery")
-        if profileImagesURLSArray.count > 0 {
-//            albumSelected = "profile"
-            let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .horizontal
-            let memberPhotos = MemberPhotosController(collectionViewLayout: layout)
-            memberPhotos.picsArray = profileImagesURLSArray
-            let memberPhotosNav = UINavigationController(rootViewController: memberPhotos)
-            self.present(memberPhotosNav, animated: true, completion: nil)
-//            self.present(memberPhotos, animated: true, completion: nil)
-//            self.navigationController?.pushViewController(memberPhotos, animated: true)
-        }
-    }
-    func setCurrentLastImage(){
-        if imagesURLSArray.count > 0 {
-            let imgUrlString = imagesURLSArray[0]
-            profileAvatarContainerView.addSubview(lastProfileImageView)
-            lastProfileImageView.rightAnchor.constraint(equalTo: profileAvatarContainerView.rightAnchor).isActive = true
-            lastProfileImageView.bottomAnchor.constraint(equalTo: contactButton.topAnchor, constant: -15).isActive = true
-            lastProfileImageView.widthAnchor.constraint(equalToConstant: 85).isActive = true
-            lastProfileImageView.heightAnchor.constraint(equalToConstant: 85).isActive = true
-            lastProfileImageView.loadImageusingCacheWithUrlString(urlString: imgUrlString)
-            lastProfileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(seeMemberImages)))
-            lastProfileImageView.isUserInteractionEnabled = true
-        }
-    }
+    
+    
+    
     func deleteUserFromEverywhere(){
         let uid = Auth.auth().currentUser?.uid
         if itIsAFriend == true {
@@ -493,26 +322,27 @@ class MemberProfileController: UIViewController {
                 print("in black list")
                 self.inBlacklist = true
                 self.hideUiIfInBlacklist(whoBlacklisted: "user")
-                self.friendText.text = "Blocked"
                 
                 self.friendTextHeightAnchor?.isActive = false
-                self.friendTextHeightAnchor = self.friendText.heightAnchor.constraint(equalToConstant: 20)
                 self.friendTextHeightAnchor?.isActive = true
             }
         }
     }
     func hideUiIfInBlacklist(whoBlacklisted: String){
-        self.hidAddToWishlistButton()
+        self.hidlikeButton()
         self.friendshipActionButton.isHidden = true
         self.contactButton.isHidden = true
         if whoBlacklisted == "user" {
             self.addToBlacklistButton.setTitle("Unblock", for: .normal)
-        } else if self.friendText.text != "Blocked"{
-            self.friendText.text = ""
-            self.friendTextHeightAnchor?.isActive = false
-            self.friendTextHeightAnchor = self.friendText.heightAnchor.constraint(equalToConstant: 0)
-            self.friendTextHeightAnchor?.isActive = true
         }
+            
+            // TODO: Missing code
+//        else if self.friendText.text != "Blocked"{
+//            self.friendText.text = ""
+//            self.friendTextHeightAnchor?.isActive = false
+//            self.friendTextHeightAnchor = self.friendText.heightAnchor.constraint(equalToConstant: 0)
+//            self.friendTextHeightAnchor?.isActive = true
+//        }
     }
     func unhideUiWhenUnblock(){
         self.setFriendshipStatus()
@@ -523,32 +353,7 @@ class MemberProfileController: UIViewController {
         }
         self.addToBlacklistButton.setTitle("Block", for: .normal)
     }
-    func getImagesURLSArray(){
-        imagesURLSArray = []
-        profileImagesURLSArray = []
-        let ref = Database.database().reference().child("user-apartments-images").child(goToControllerByMemberUid!)
-        ref.observeSingleEvent(of: .value) { (snap) in
-            for child in snap.children.allObjects as! [DataSnapshot]{
-                let imageURL = child.value as! String
-                self.imagesURLSArray.insert(imageURL, at: 0)
-            }
-            self.setCurrentLastImage()
-        }
-        let pref = Database.database().reference().child("user-profile-images").child(goToControllerByMemberUid!)
-        pref.observeSingleEvent(of: .value) { (prsnap) in
-            print("prsnap: ",prsnap)
-            var snapshotValueExist = false
-            for prchild in prsnap.children.allObjects as! [DataSnapshot]{
-                snapshotValueExist = true
-                let imageURL = prchild.value as! String
-                self.profileImagesURLSArray.insert(imageURL, at: 0)
-            }
-            print("snapshotValueExist: ", snapshotValueExist)
-            if snapshotValueExist == false {
-                self.profileImagesURLSArray.insert(self.profileImageUrlG!, at: 0)
-            }
-        }
-    }
+    
     func isInYourWishlist(){
         let uid = Auth.auth().currentUser?.uid
         let ref = Database.database().reference().child("users-wishlists").child(uid!)
@@ -560,16 +365,19 @@ class MemberProfileController: UIViewController {
             }
             if self.isInWishlist == true {
                 print("Yes. in wishlist")
-                self.hidAddToWishlistButton()
+                self.hidlikeButton()
             }
         }
     }
-    func hidAddToWishlistButton(){
-        addToWishlistButton.isHidden = true
+    func hidlikeButton(){
+        likeButton.isHidden = true
     }
     @objc func goBack() {
         imagesURLSArray = [String]()
         self.dismiss(animated: true, completion: nil)
+        
+        navigationController?.popViewController(animated: true)
+        
     }
     func optionsContainerSetup(){
         view.addSubview(optionsContainer)
@@ -577,8 +385,8 @@ class MemberProfileController: UIViewController {
         optionsContainer.addSubview(blackListSeperatorView)
         optionsContainer.addSubview(reportButton)
         
-        optionsContainer.rightAnchor.constraint(equalTo: profileAvatarContainerView.rightAnchor).isActive = true
-        optionsContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 64).isActive = true
+        optionsContainer.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        optionsContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 24).isActive = true
         optionsContainer.widthAnchor.constraint(equalToConstant: 70).isActive = true
         optionsContainer.heightAnchor.constraint(equalToConstant: 100).isActive = true
         optionsContainer.isHidden = true
@@ -598,6 +406,7 @@ class MemberProfileController: UIViewController {
         reportButton.widthAnchor.constraint(equalTo: addToBlacklistButton.widthAnchor).isActive = true
         reportButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
     }
+    
     func setupNavBarItems(){
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : CustomColors.commonGrey1]
         let backImage = UIImage(named: "arrow-left")?.withRenderingMode(.alwaysOriginal)
@@ -606,8 +415,10 @@ class MemberProfileController: UIViewController {
         let optionsButton = UIBarButtonItem(image: optionsImage, style: .plain, target: self, action: #selector(hideUnhideOptions))
         navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItem = optionsButton
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : CustomColors.commonGrey1]
         self.navigationItem.title = "Profile"
     }
+    
     @objc func hideUnhideOptions(){
         if optionsContainer.isHidden == true {
             optionsContainer.isHidden = false
@@ -615,6 +426,7 @@ class MemberProfileController: UIViewController {
             optionsContainer.isHidden = true
         }
     }
+    
     @objc func addToWishlist(){
         checkIfYouAreBanned()
         let addItToWishlistByUid = goToControllerByMemberUid
@@ -626,7 +438,7 @@ class MemberProfileController: UIViewController {
         likesReference.updateChildValues([uid: 1])
         self.whriteToUserNotification(text: likeText)
         self.sentProposalNotification(toId: goToControllerByMemberUid!, fromId: uid, text: self.notifLike)
-        hidAddToWishlistButton()
+        hidlikeButton()
         print("Add to wishlist")
         inWishList = true
     }
@@ -874,55 +686,43 @@ class MemberProfileController: UIViewController {
         friendshipActionButton.titleLabel?.heightAnchor.constraint(equalToConstant: 0).isActive = true
     }
     func acceptFriendshipProposalSetup(){
-        friendshipActionButton.titleLabel?.leftAnchor.constraint(equalTo: friendshipActionButton.leftAnchor).isActive = true
-        friendshipActionButton.setTitle("ACCEPT FRIEND", for: .normal)
+ //       friendshipActionButton.titleLabel?.leftAnchor.constraint(equalTo: friendshipActionButton.leftAnchor).isActive = true
+        friendshipActionButton.setTitle("+accept", for: .normal)
         friendshipActionButton.titleLabel?.textColor = CustomColors.commonBlue1
-        scrollView.addSubview(friendshipActionButton)
-        friendshipActionButton.leftAnchor.constraint(equalTo: friendText.leftAnchor).isActive = true
-        friendshipActionButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
-        friendshipActionButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        friendshipActionButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+   //     scrollView.addSubview(friendshipActionButton)
+   //     friendshipActionButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
+   //     friendshipActionButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
+   //     friendshipActionButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     func proposalWasSentButtonSetup(){
-        friendshipActionButton.titleLabel?.leftAnchor.constraint(equalTo: friendshipActionButton.leftAnchor).isActive = true
-        friendshipActionButton.setTitle("CANCEL REQUEST", for: .normal)
+    //    friendshipActionButton.titleLabel?.leftAnchor.constraint(equalTo: friendshipActionButton.leftAnchor).isActive = true
+        friendshipActionButton.setTitle("-cancel", for: .normal)
         friendshipActionButton.titleLabel?.textColor = CustomColors.commonBlue1
-        scrollView.addSubview(friendshipActionButton)
-        friendshipActionButton.leftAnchor.constraint(equalTo: friendText.leftAnchor).isActive = true
-        friendshipActionButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
-        friendshipActionButton.widthAnchor.constraint(equalToConstant: 145).isActive = true
-        friendshipActionButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+   //     scrollView.addSubview(friendshipActionButton)
+   //     friendshipActionButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
+   //     friendshipActionButton.widthAnchor.constraint(equalToConstant: 145).isActive = true
+   //     friendshipActionButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     func deleteFromFriendsButtonSetup(){
-        friendshipActionButton.titleLabel?.leftAnchor.constraint(equalTo: friendshipActionButton.leftAnchor).isActive = true
-        friendshipActionButton.setTitle("delete friend", for: .normal)
+    //    friendshipActionButton.titleLabel?.leftAnchor.constraint(equalTo: friendshipActionButton.leftAnchor).isActive = true
+        friendshipActionButton.setTitle("-delete", for: .normal)
         friendshipActionButton.titleLabel?.textColor = CustomColors.commonBlue1
-        scrollView.addSubview(friendshipActionButton)
-        friendshipActionButton.leftAnchor.constraint(equalTo: friendText.leftAnchor).isActive = true
-        friendshipActionButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
-        friendshipActionButton.widthAnchor.constraint(equalToConstant: 110).isActive = true
-        friendshipActionButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+ //       scrollView.addSubview(friendshipActionButton)
+// //       friendshipActionButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
+//        friendshipActionButton.widthAnchor.constraint(equalToConstant: 110).isActive = true
+//        friendshipActionButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         let string = "FRIEND"
         let stringLen = string.count
         let attributedStr = NSMutableAttributedString.init(string: string)
         attributedStr.addAttribute(.foregroundColor, value: CustomColors.lightOrange1, range: NSRange(location: 0, length: stringLen))
-        self.friendText.attributedText = attributedStr
-        self.friendText.font = .boldSystemFont(ofSize: 15)
-        
-        self.friendTextHeightAnchor?.isActive = false
-        self.friendTextHeightAnchor = self.friendText.heightAnchor.constraint(equalToConstant: 20)
-        self.friendTextHeightAnchor?.isActive = true
     }
     func addToFriendsButtonSetup(){
-        friendshipActionButton.titleLabel?.leftAnchor.constraint(equalTo: friendshipActionButton.leftAnchor).isActive = true
-        friendshipActionButton.setTitle("ADD FRIEND", for: .normal)
+    //    friendshipActionButton.titleLabel?.leftAnchor.constraint(equalTo: friendshipActionButton.leftAnchor).isActive = true
+        friendshipActionButton.setTitle("+friend", for: .normal)
         friendshipActionButton.titleLabel?.textColor = CustomColors.commonBlue1
-        scrollView.addSubview(friendshipActionButton)
-        friendshipActionButton.leftAnchor.constraint(equalTo: friendText.leftAnchor).isActive = true
-        friendshipActionButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
-        friendshipActionButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        friendshipActionButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
+    
+    
     func setFriendshipStatus(){
         inFoFArray = false
         var commonFriend = ""
@@ -978,12 +778,7 @@ class MemberProfileController: UIViewController {
                     let stringLen = string.count
                     let attributedStr = NSMutableAttributedString.init(string: string)
                     attributedStr.addAttribute(.foregroundColor, value: CustomColors.lightOrange1, range: NSRange(location: 0, length: stringLen))
-                    self.friendText.attributedText = attributedStr
-                    self.friendText.font = .boldSystemFont(ofSize: 15)
                     
-                    self.friendTextHeightAnchor?.isActive = false
-                    self.friendTextHeightAnchor = self.friendText.heightAnchor.constraint(equalToConstant: 20)
-                    self.friendTextHeightAnchor?.isActive = true
                 } else {
                     print("commonFriend: ",commonFriend)
                     let ref = Database.database().reference().child("users").child(commonFriend)
@@ -991,17 +786,14 @@ class MemberProfileController: UIViewController {
                         guard let value = snap.value as? [String: Any] else { return }
                         let name = value["name"] as? String
                         print("common friend is: ", name!)
-                        let string = "FRIEND OF " + name!
+                        let string = "FRIEND of " + name!
                         let stringLen = string.count
                         let attributedStr = NSMutableAttributedString.init(string: string)
                         attributedStr.addAttribute(.foregroundColor, value: CustomColors.commonGrey1, range: NSRange(location: 0, length: stringLen))
                         attributedStr.addAttribute(.foregroundColor, value: CustomColors.lightOrange1, range: NSRange(location: 0, length: 6))
-                        self.friendText.attributedText = attributedStr
-                        self.friendText.font = .boldSystemFont(ofSize: 15)
                         
-                        self.friendTextHeightAnchor?.isActive = false
-                        self.friendTextHeightAnchor = self.friendText.heightAnchor.constraint(equalToConstant: 20)
-                        self.friendTextHeightAnchor?.isActive = true
+                        self.connectionIndicatorLabel.attributedText = attributedStr
+                        
                     }
                 }
             }
@@ -1010,53 +802,80 @@ class MemberProfileController: UIViewController {
 //            }
         }
     }
+    
+    
+    
+    
+    
+    // MARK: - Populate
+    
+    
     var profileImageUrlG: String?
-    func setupUserPropsValues() {
+    
+    
+    func populateData() {
+        
         let uid = goToControllerByMemberUid
-//        Database.database().isPersistenceEnabled = false
         let ref = Database.database().reference().child("users").child(uid!)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
-            
-//            Database.database().isPersistenceEnabled = true
-            print(snapshot)
+
             guard let value = snapshot.value as? [String: Any] else { return }
+            
+            
+            
+            // Profile and top menu
+            let profileImageUrl = value["profileImageUrl"] as? String // No idea why you need this
+            self.profileImageUrlG = profileImageUrl
+            
+            if profileImageUrl == "empty" {
+                self.profileAvatarView.image = UIImage(named: "emptyavatar")
+            } else if profileImageUrl == "deleted" {
+                self.profileAvatarView.image = UIImage(named: "deletedprofile")
+            } else {
+                self.profileAvatarView.loadImageusingCacheWithUrlString(urlString: profileImageUrl!)
+                self.profileAvatarView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.seeMemberProfileImages)))
+                self.profileAvatarView.isUserInteractionEnabled = true
+            }
+            
+            
+            
+            
+            // Content in here
+            
             let meetChecked = value["meetChecked"] as? Bool
             let dateChecked = value["dateChecked"] as? Bool
-            print("CURRENT`: ", value["currentLoc"] as? String)
-            if value["currentLoc"] as? String != nil {
-                if value["currentLoc"] as? String != "" {
-                    self.curLoc = value["currentLoc"] as? String
-                    self.currentLocationView.heightAnchor.constraint(equalToConstant: 28).isActive = true
-                } else {
-                    self.currentLocationView.heightAnchor.constraint(equalToConstant: 0).isActive = true
-                }
-            } else {
-                self.currentLocationView.heightAnchor.constraint(equalToConstant: 0).isActive = true
+            
+            var currentLocation: String? = nil
+            if let loc = value["currentLoc"] as? String, !loc.isEmpty {
+                self.curLoc = loc
+                currentLocation = "Current location: " + loc
             }
+            
             let acceptingGuests = value["acceptingGuests"] as? String
             let homeLocation = value["loc"] as? String
             let name = value["name"] as? String
-            let profileImageUrl = value["profileImageUrl"] as? String
-            self.profileImageUrlG = profileImageUrl
+            
+            
             let occupation = value["occupation"] as? String
             let age = value["age"] as? String
-            self.currentLocationView.text = "Current location: " + self.curLoc!
-            self.homeLocationView.text = /*"City, Country: " + */homeLocation!
-            self.activityHeightAnchor?.isActive = false
+            
+            // Can be nil
+            var lastSeen: String = ""
+            var lastSeenColor: UIColor = CustomColors.commonGrey1
+            
             if value["isActive"] != nil && value["disconectTime"] != nil {
-                self.activityHeightAnchor = self.activity.heightAnchor.constraint(equalToConstant: 23)
+                
                 if value["isActive"] as! Bool == true {
-                    self.activity.text = "Active"
+                    lastSeen = "Active"
+                    lastSeenColor = UIColor(red: 33.0 / 255.0, green: 187.0 / 255.0, blue: 215.0 / 255.0, alpha: 1.0)
                 } else {
-                    print("aaa: ", value["isActive"]!)
+                    
                     let strTimestamp = String(describing: value["disconectTime"]!)
-                    print("strTimestamp: ", strTimestamp, type(of: strTimestamp))
                     var timestamp = NSNumber()
                     if let myInteger = Int(strTimestamp.dropLast(3)) {
                         timestamp = NSNumber(value:myInteger)
-                        print("myInteger: ", myInteger, ", timestamp: ", timestamp)
                     }
-//                    let timestamp = value["disconectTime"] as? NSNumber
+
                     let minute = 60
                     let hour = 60 * minute
                     let day = 24 * hour
@@ -1086,42 +905,35 @@ class MemberProfileController: UIViewController {
                     } else if timeInterval > year {
                         agoString = "\(timeInterval / year) years ago"
                     }
-                    self.activity.text = "Last activity " + agoString
-                    self.activity.textColor = CustomColors.commonGrey1
-//                    }
+                    lastSeen = "Last activity " + agoString
+                    
                 }
-            } else {
-                self.activityHeightAnchor = self.activity.heightAnchor.constraint(equalToConstant: 0)
             }
-            self.activityHeightAnchor?.isActive = true
-            if value["aboutMe"] != nil {
-                self.aboutMe = value["aboutMe"] as? String
-            }
-            if value["aboutMyPlace"] != nil {
-                self.aboutMyPlace = value["aboutMyPlace"] as? String
+ 
+   
+            
+            
+            self.aboutMe = value["aboutMe"] as? String
+            self.aboutMyPlace = value["aboutMyPlace"] as? String
+            
+            
+            var availableOptions: String = ""
+            
+            if acceptingGuests == "maybe"{
+                availableOptions.append("Maybe accepting guests\n")
+            } else if acceptingGuests == "yes"{
+                availableOptions.append("Accepting guests\n")
             }
             if meetChecked == true {
-                self.meetingUpTextView.text = "Meeting up"
-                self.meetingUpTextView.heightAnchor.constraint(equalToConstant: 28).isActive = true
-            } else {
-                self.meetingUpTextView.heightAnchor.constraint(equalToConstant: 0).isActive = true
+                availableOptions.append("Meeting up\n")
             }
             if dateChecked == true {
-                self.datingTextView.text = "Dating"
-                self.datingTextView.heightAnchor.constraint(equalToConstant: 28).isActive = true
-            } else {
-                self.datingTextView.heightAnchor.constraint(equalToConstant: 0).isActive = true
+                availableOptions.append("Dating\n")
             }
-            if acceptingGuests == "maybe"{
-                self.accepingGuestsTextView.text = "Maybe accepting guests"
-                self.accepingGuestsTextView.heightAnchor.constraint(equalToConstant: 28).isActive = true
-            } else if acceptingGuests == "yes"{
-                self.accepingGuestsTextView.text = "Accepting guests"
-                self.accepingGuestsTextView.heightAnchor.constraint(equalToConstant: 28).isActive = true
-            } else {
-                self.accepingGuestsTextView.heightAnchor.constraint(equalToConstant: 0).isActive = true
-            }
-//            self.profileAvatarView.loadImageusingCacheWithUrlString(urlString: profileImageUrl!)
+            
+            
+            
+            // We will see what we do about these
             if value["aboutServicesEnabled"] != nil {
                 self.aboutServicesEnabled = value["aboutServicesEnabled"] as! Bool
             }
@@ -1129,246 +941,259 @@ class MemberProfileController: UIViewController {
             if value["offerServiseChecked"] != nil {
                 self.offerServiseChecked = value["offerServiseChecked"] as! Bool
             }
-            self.aboutServicesTextTitleTopAnchor?.isActive = false
-            self.aboutServicesTextTitleHeightAnchor?.isActive = false
-            self.aboutServicesTextViewHeightAnchor?.isActive = false
-            if self.aboutServicesEnabled && self.offerServiseChecked {
-                self.aboutServicesTextView.text = value["aboutServices"] as! String
-                if value["aboutServices"] != nil && value["aboutServices"] as? String != "" {
-                    self.aboutServicesTextView.text! = value["aboutServices"] as! String
-                    let height3 = self.estimateFrameForText(text: self.aboutServicesTextView.text!).height + 20
-                    self.aboutServicesTextViewHeightAnchor = self.aboutServicesTextView.heightAnchor.constraint(equalToConstant: height3)
-                    self.aboutServicesTextTitleHeightAnchor = self.aboutMyServicesTextTitle.heightAnchor.constraint(equalToConstant: 23)
-                    self.aboutServicesTextTitleTopAnchor = self.aboutMyServicesTextTitle.topAnchor.constraint(equalTo: self.datingTextView.bottomAnchor, constant: 20)
-                } else {
-                    self.aboutServicesTextViewHeightAnchor = self.aboutServicesTextView.heightAnchor.constraint(equalToConstant: 0)
-                    self.aboutServicesTextTitleHeightAnchor = self.aboutMyServicesTextTitle.heightAnchor.constraint(equalToConstant: 0)
-                    self.aboutServicesTextTitleTopAnchor = self.aboutMyServicesTextTitle.topAnchor.constraint(equalTo: self.datingTextView.bottomAnchor, constant: 0)
-                }
-            } else {
-                self.aboutServicesTextTitleHeightAnchor = self.aboutMyServicesTextTitle.heightAnchor.constraint(equalToConstant: 0)
-                self.aboutServicesTextViewHeightAnchor = self.aboutServicesTextView.heightAnchor.constraint(equalToConstant: 0)
-                self.aboutServicesTextTitleTopAnchor = self.aboutMyServicesTextTitle.topAnchor.constraint(equalTo: self.datingTextView.bottomAnchor, constant: 0)
-            }
-            self.aboutServicesTextTitleTopAnchor?.isActive = true
-            self.aboutServicesTextTitleHeightAnchor?.isActive = true
-            self.aboutServicesTextViewHeightAnchor?.isActive = true
-            var nameAndAge = name! + " " + age!
-            let nameLen = name?.count
-            let ageLen = age?.count
-            let nameAgeLen = nameAndAge.count
-            let range = NSRange(location: 0, length: nameAgeLen)
-            let attributedStr = NSMutableAttributedString.init(string: nameAndAge)
-            attributedStr.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 22), range: range)
-            attributedStr.addAttribute(.font, value: UIFont.systemFont(ofSize: 22), range: NSRange(location: nameLen! + 1, length: ageLen!))
-            attributedStr.addAttribute(.foregroundColor, value: CustomColors.commonGrey1, range: range)
-//            nameAndAge = attributedStr
-            if profileImageUrl == "empty" {
-                self.profileAvatarView.image = UIImage(named: "emptyavatar")
-            } else if profileImageUrl == "deleted" {
-                self.profileAvatarView.image = UIImage(named: "deletedprofile")
-            } else {
-                self.profileAvatarView.loadImageusingCacheWithUrlString(urlString: profileImageUrl!)
-                self.profileAvatarView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.seeMemberProfileImages)))
-                self.profileAvatarView.isUserInteractionEnabled = true
-            }
-//            self.profileAvatarView.loadImageusingCacheWithUrlString(urlString: profileImageUrl!)
-            self.navigationItem.title = nameAndAge
-            self.memberNameAndAge.attributedText = attributedStr
-//            self.memberNameAndAge.text = nameAndAge
-            self.homeLocationView.text = /*"City, Country: " + */homeLocation!
-            self.occupationText.text = occupation
-            if occupation?.count == 0 {
-                self.occupationText.heightAnchor.constraint(equalToConstant: 0).isActive = true
+            
+            
+//            if self.aboutServicesEnabled && self.offerServiseChecked {
+//                self.aboutServicesTextView.text = value["aboutServices"] as! String
+//                if value["aboutServices"] != nil && value["aboutServices"] as? String != "" {
+//                    self.aboutServicesTextView.text! = value["aboutServices"] as! String
+//                    let height3 = self.estimateFrameForText(text: self.aboutServicesTextView.text!).height + 20
+//                    self.aboutServicesTextViewHeightAnchor = self.aboutServicesTextView.heightAnchor.constraint(equalToConstant: height3)
+//                    self.aboutServicesTextTitleHeightAnchor = self.aboutMyServicesTextTitle.heightAnchor.constraint(equalToConstant: 23)
+//                    self.aboutServicesTextTitleTopAnchor = self.aboutMyServicesTextTitle.topAnchor.constraint(equalTo: self.datingTextView.bottomAnchor, constant: 20)
+//                } else {
+//                    self.aboutServicesTextViewHeightAnchor = self.aboutServicesTextView.heightAnchor.constraint(equalToConstant: 0)
+//                    self.aboutServicesTextTitleHeightAnchor = self.aboutMyServicesTextTitle.heightAnchor.constraint(equalToConstant: 0)
+//                    self.aboutServicesTextTitleTopAnchor = self.aboutMyServicesTextTitle.topAnchor.constraint(equalTo: self.datingTextView.bottomAnchor, constant: 0)
+//                }
+//            } else {
+//                self.aboutServicesTextTitleHeightAnchor = self.aboutMyServicesTextTitle.heightAnchor.constraint(equalToConstant: 0)
+//                self.aboutServicesTextViewHeightAnchor = self.aboutServicesTextView.heightAnchor.constraint(equalToConstant: 0)
+//                self.aboutServicesTextTitleTopAnchor = self.aboutMyServicesTextTitle.topAnchor.constraint(equalTo: self.datingTextView.bottomAnchor, constant: 0)
+//            }
+
+            
+            
+            
+            
+            // There can be a template or i can build it right here
+            
+            
+            let compose = NSMutableAttributedString(string: "")
+            let newline = NSAttributedString(string: "\n")
+            
+            
+            func newlineWith(spacing: CGFloat) -> NSAttributedString {
+                let style = NSMutableParagraphStyle()
+
+                style.maximumLineHeight = spacing
+                style.minimumLineHeight = spacing
+                return NSAttributedString(string: "\n", attributes: [.font: UIFont(name: "HelveticaNeue-Medium", size: 14.0)!,
+                                                                     .paragraphStyle: style])
             }
             
-            if self.aboutMe != "" && self.aboutMe != nil {
-                self.aboutMeTextView.text = self.aboutMe
-                let height1 = self.estimateFrameForText(text: self.aboutMe!).height + 10
-                self.aboutMeTextTitle.heightAnchor.constraint(equalToConstant: 23).isActive = true
-                self.aboutMeTextTitle.topAnchor.constraint(equalTo: self.aboutServicesTextView.bottomAnchor, constant: 20).isActive = true
-                self.aboutMeTextView.heightAnchor.constraint(equalToConstant: height1).isActive = true
-            } else {
-                self.aboutMeTextTitle.heightAnchor.constraint(equalToConstant: 0).isActive = true
-                self.aboutMeTextTitle.topAnchor.constraint(equalTo: self.aboutServicesTextView.bottomAnchor, constant: 0).isActive = true
-                self.aboutMeTextView.heightAnchor.constraint(equalToConstant: 0).isActive = true
+            
+            
+            // Name
+            if let name = name {
+                compose.append( NSAttributedString(string: name.appending(""),
+                                                   attributes: [
+                                                    .font: UIFont(name: "HelveticaNeue-Medium", size: 18.0)!,
+                                                    .foregroundColor: UIColor(red: 61.0 / 255.0, green: 77.0 / 255.0, blue: 89.0 / 255.0, alpha: 1.0)
+                    ]
+                ))
+                
             }
-            if self.aboutMyPlace != "" && self.aboutMyPlace != nil  {
-                self.aboutMyPlaceTextView.text = self.aboutMyPlace
-                let height2 = self.estimateFrameForText(text: self.aboutMyPlace!).height + 10
-                self.aboutMyPlaceTextTitle.heightAnchor.constraint(equalToConstant: 23).isActive = true
-                self.aboutMyPlaceTextTitle.topAnchor.constraint(equalTo: self.aboutMeTextView.bottomAnchor, constant: 20).isActive = true
-                self.aboutMyPlaceTextView.heightAnchor.constraint(equalToConstant: height2).isActive = true
-            } else {
-                self.aboutMyPlaceTextTitle.heightAnchor.constraint(equalToConstant: 0).isActive = true
-                self.aboutMyPlaceTextTitle.topAnchor.constraint(equalTo: self.aboutMeTextView.bottomAnchor, constant: 0).isActive = true
-                self.aboutMyPlaceTextView.heightAnchor.constraint(equalToConstant: 0).isActive = true
+            
+            
+            
+            // Age
+            if let age = age {
+                compose.append( NSAttributedString(string: age.appending("\n"),
+                                                   attributes: [
+                                                    .font: UIFont(name: "HelveticaNeue-Light", size: 18.0)!,
+                                                    .foregroundColor: UIColor(red: 61.0 / 255.0, green: 77.0 / 255.0, blue: 89.0 / 255.0, alpha: 1.0)
+                    ]
+                ))
+                
             }
+            
+            
+            
+            // Last seen
+            compose.append( NSAttributedString(string: lastSeen.appending("\n"),
+                                               attributes: [
+                                                .font: UIFont(name: "HelveticaNeue", size: 11.0)!,
+                                                .foregroundColor: lastSeenColor
+                ]
+            ))
+            
+            // Newline
+            compose.append( newlineWith(spacing: 13) )
+            
+            
+            
+            // Occupation
+            if let occupation = occupation {
+                compose.append( NSAttributedString(string: occupation.appending("\n"),
+                                                   attributes: [
+                                                    .font: UIFont(name: "HelveticaNeue-Medium", size: 14.0)!,
+                                                    .foregroundColor: UIColor(red: 33.0 / 255.0, green: 187.0 / 255.0, blue: 215.0 / 255.0, alpha: 1.0)
+                    ]
+                ))
+                
+            }
+            
+            
+            
+            
+            // Home Location
+            if let homeLocation = homeLocation {
+                compose.append( NSAttributedString(string: homeLocation.appending("\n"),
+                                                   attributes: [
+                                                    .font: UIFont(name: "HelveticaNeue-Light", size: 14.0)!,
+                                                    .foregroundColor: UIColor(red: 61.0 / 255.0, green: 77.0 / 255.0, blue: 89.0 / 255.0, alpha: 1.0)
+                    ]
+                ))
+                
+            }
+            
+            
+            
+            
+            // Current Location
+            if let currentLocation = currentLocation {
+                compose.append( NSAttributedString(string: currentLocation.appending("\n"),
+                                                   attributes: [
+                                                    .font: UIFont(name: "HelveticaNeue-Light", size: 14.0)!,
+                                                    .foregroundColor: UIColor(red: 61.0 / 255.0, green: 77.0 / 255.0, blue: 89.0 / 255.0, alpha: 1.0)
+                    ]
+                ))
+                
+            }
+            
+            
+            
+            
+            // Available Options provided
+            if availableOptions.isEmpty == false {
+            
+                // Newline
+                compose.append( newlineWith(spacing: 13) )
+                
+                compose.append( NSAttributedString(string: availableOptions,
+                                                   attributes: [
+                                                    .font: UIFont(name: "HelveticaNeue-Medium", size: 14.0)!,
+                                                    .foregroundColor: UIColor(red: 255.0 / 255.0, green: 165.0 / 255.0, blue: 0.0 / 255.0, alpha: 1.0)
+                    ]
+                ))
+                
+                // Newline is disabled here since the logic always contains a new line at the end
+                // compose.append(newline)
+            }
+            
+            
+            
+            
+            // About me
+            if let aboutMe = self.aboutMe, aboutMe.isEmpty == false {
+                
+                // Newline
+                compose.append( newlineWith(spacing: 13) )
+                
+                compose.append( NSAttributedString(string: "About me".appending("\n"),
+                                                   attributes: [
+                                                    .font: UIFont(name: "HelveticaNeue-Medium", size: 14.0)!,
+                                                    .foregroundColor: UIColor(red: 61.0 / 255.0, green: 77.0 / 255.0, blue: 89.0 / 255.0, alpha: 1.0)
+                    ]
+                ))
+                
+                
+                
+                compose.append( NSAttributedString(string: aboutMe.appending("\n"),
+                                                   attributes: [
+                                                    .font: UIFont(name: "HelveticaNeue-Light", size: 14.0)!,
+                                                    .foregroundColor: UIColor(red: 61.0 / 255.0, green: 77.0 / 255.0, blue: 89.0 / 255.0, alpha: 1.0)
+                    ]
+                ))
+                
+            }
+            
+            
+            // About my place
+            if let aboutMyPlace = self.aboutMyPlace, aboutMyPlace.isEmpty == false {
+                
+                // Newline
+                compose.append(newline)
+                
+                compose.append( NSAttributedString(string: "About my place",
+                                                   attributes: [
+                                                    .font: UIFont(name: "HelveticaNeue-Medium", size: 18.0)!,
+                                                    .foregroundColor: UIColor(red: 61.0 / 255.0, green: 77.0 / 255.0, blue: 89.0 / 255.0, alpha: 1.0)
+                    ]
+                ))
+                
+                // Newline
+                compose.append(newline)
+                
+                
+                compose.append( NSAttributedString(string: aboutMyPlace,
+                                                   attributes: [
+                                                    .font: UIFont(name: "HelveticaNeue-Light", size: 14.0)!,
+                                                    .foregroundColor: UIColor(red: 61.0 / 255.0, green: 77.0 / 255.0, blue: 89.0 / 255.0, alpha: 1.0)
+                    ]
+                ))
+                
+                // Newline
+                compose.append(newline)
+                
+            }
+            
+            
+            
+            
+            self.navigationItem.title =  name! + " " + age!
+            
+            //
+            
+            self.contentLabel.attributedText = compose
+            
+            self.contentLabel.setNeedsLayout()
+            self.contentLabel.layoutIfNeeded()
+            
+            // Multiple lines of options
+            
+//
+//
+//            let attributedString = NSMutableAttributedString(string: "About me\nI am a student living in Porto, originally from Denmark.", attributes: [
+//                .font: UIFont(name: "HelveticaNeue-Light", size: 14.0)!,
+//                .foregroundColor: UIColor(red: 61.0 / 255.0, green: 77.0 / 255.0, blue: 89.0 / 255.0, alpha: 1.0)
+//                ])
+//            attributedString.addAttribute(.font, value: UIFont(name: "HelveticaNeue-Medium", size: 14.0)!, range: NSRange(location: 0, length: 9))
+//
+            
+            
             self.getImagesURLSArray()
         })
     }
+    
+    
     func estimateFrameForText(text: String) -> CGRect {
         let width = scrollView.frame.width - 70
         let size = CGSize(width: width, height: 1000)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
         return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15)], context: nil)
     }
-    func profileAvatarContainerViewSetup(){
-        view.addSubview(profileAvatarContainerView)
-        profileAvatarContainerView.addSubview(profileAvatarView)
-        profileAvatarContainerView.addSubview(addToWishlistButton)
-        profileAvatarContainerView.addSubview(contactButton)
-        
-        profileAvatarContainerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 80).isActive = true
-        profileAvatarContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        profileAvatarContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
-        profileAvatarContainerView.heightAnchor.constraint(equalTo: profileAvatarContainerView.widthAnchor).isActive = true
-        
-        profileAvatarView.centerXAnchor.constraint(equalTo: profileAvatarContainerView.centerXAnchor).isActive = true
-        profileAvatarView.centerYAnchor.constraint(equalTo: profileAvatarContainerView.centerYAnchor).isActive = true
-        profileAvatarView.widthAnchor.constraint(equalTo: profileAvatarContainerView.widthAnchor).isActive = true
-        profileAvatarView.heightAnchor.constraint(equalTo: profileAvatarContainerView.heightAnchor).isActive = true
-        
-        addToWishlistButton.rightAnchor.constraint(equalTo: profileAvatarContainerView.rightAnchor).isActive = true
-        addToWishlistButton.bottomAnchor.constraint(equalTo: profileAvatarContainerView.bottomAnchor, constant: -25).isActive = true
-        addToWishlistButton.widthAnchor.constraint(equalToConstant: 85).isActive = true
-        addToWishlistButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        
-        contactButton.rightAnchor.constraint(equalTo: profileAvatarContainerView.rightAnchor).isActive = true
-        contactButton.bottomAnchor.constraint(equalTo: addToWishlistButton.topAnchor, constant: -15).isActive = true
-        contactButton.widthAnchor.constraint(equalToConstant: 85).isActive = true
-        contactButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-    }
+   
     var friendTextHeightAnchor: NSLayoutConstraint?
     var aboutServicesTextTitleTopAnchor: NSLayoutConstraint?
     var activityHeightAnchor: NSLayoutConstraint?
     var aboutServicesTextTitleHeightAnchor: NSLayoutConstraint?
     var aboutServicesTextViewHeightAnchor: NSLayoutConstraint?
     func memberPropsContainerSetup(){
-        view.addSubview(scrollView)
-        scrollView.addSubview(friendText)
-        scrollView.addSubview(memberNameAndAge)
-        scrollView.addSubview(activity)
-        scrollView.addSubview(occupationText)
-        scrollView.addSubview(homeLocationView)
-        scrollView.addSubview(currentLocationView)
-        scrollView.addSubview(accepingGuestsTextView)
-        scrollView.addSubview(meetingUpTextView)
-        scrollView.addSubview(datingTextView)
-        scrollView.addSubview(aboutMyServicesTextTitle)
-        scrollView.addSubview(aboutServicesTextView)
-        scrollView.addSubview(aboutMeTextTitle)
-        scrollView.addSubview(aboutMeTextView)
-        scrollView.addSubview(aboutMyPlaceTextTitle)
-        scrollView.addSubview(aboutMyPlaceTextView)
-//        memberNameAndAge.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
-        
-        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        scrollView.topAnchor.constraint(equalTo: profileAvatarContainerView.bottomAnchor, constant: 10).isActive = true
-        scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
-        friendText.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        friendText.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 40).isActive = true
-        friendText.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -80).isActive = true
-        friendTextHeightAnchor = friendText.heightAnchor.constraint(equalToConstant: 0)
-        friendTextHeightAnchor?.isActive = true
-        
-        memberNameAndAge.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        memberNameAndAge.topAnchor.constraint(equalTo: friendText.bottomAnchor).isActive = true
-        memberNameAndAge.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -70).isActive = true
-        memberNameAndAge.heightAnchor.constraint(equalToConstant: 35).isActive = true
-        memberNameAndAge.textInputView.leftAnchor.constraint(equalTo: memberNameAndAge.leftAnchor, constant: 2).isActive = true
-        
         setFriendshipStatus()
-        
-        activity.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        activity.topAnchor.constraint(equalTo: memberNameAndAge.bottomAnchor).isActive = true
-        activity.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -70).isActive = true
-        activityHeightAnchor = activity.heightAnchor.constraint(equalToConstant: 23)
-        activityHeightAnchor?.isActive = true
-        
-        occupationText.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        occupationText.topAnchor.constraint(equalTo: activity.bottomAnchor).isActive = true
-        occupationText.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -70).isActive = true
-        occupationText.heightAnchor.constraint(equalToConstant: 28).isActive = true
-        
-        homeLocationView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        homeLocationView.topAnchor.constraint(equalTo: occupationText.bottomAnchor).isActive = true
-        homeLocationView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -70).isActive = true
-        homeLocationView.heightAnchor.constraint(equalToConstant: 28).isActive = true
-        
-        currentLocationView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        currentLocationView.topAnchor.constraint(equalTo: homeLocationView.bottomAnchor).isActive = true
-        currentLocationView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -70).isActive = true
-        
-        accepingGuestsTextView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        accepingGuestsTextView.topAnchor.constraint(equalTo: currentLocationView.bottomAnchor).isActive = true
-        accepingGuestsTextView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -70).isActive = true 
-        
-        meetingUpTextView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        meetingUpTextView.topAnchor.constraint(equalTo: accepingGuestsTextView.bottomAnchor).isActive = true
-        meetingUpTextView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -70).isActive = true
-        
-        datingTextView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        datingTextView.topAnchor.constraint(equalTo: meetingUpTextView.bottomAnchor).isActive = true
-        datingTextView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -70).isActive = true
-        
-        aboutMyServicesTextTitle.leftAnchor.constraint(equalTo:  scrollView.leftAnchor, constant: 38).isActive = true
-        aboutServicesTextTitleTopAnchor = aboutMyServicesTextTitle.topAnchor.constraint(equalTo: datingTextView.bottomAnchor, constant: 20)
-        aboutServicesTextTitleTopAnchor?.isActive = true
-        aboutMyServicesTextTitle.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        aboutServicesTextTitleHeightAnchor = self.aboutMyServicesTextTitle.heightAnchor.constraint(equalToConstant: 28)
-        aboutServicesTextTitleHeightAnchor?.isActive = true
-        
-        aboutServicesTextView.leftAnchor.constraint(equalTo:  scrollView.leftAnchor, constant: 33).isActive = true
-        aboutServicesTextView.topAnchor.constraint(equalTo: aboutMyServicesTextTitle.bottomAnchor).isActive = true
-        aboutServicesTextView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -70).isActive = true
-        aboutServicesTextViewHeightAnchor = self.aboutServicesTextView.heightAnchor.constraint(equalToConstant: 28)
-        aboutServicesTextViewHeightAnchor?.isActive = true
-        
-        aboutMeTextTitle.leftAnchor.constraint(equalTo:  scrollView.leftAnchor, constant: 38).isActive = true
-//        aboutMeTextTitle.topAnchor.constraint(equalTo: aboutServicesTextView.bottomAnchor, constant: 20).isActive = true
-        aboutMeTextTitle.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        
-        aboutMeTextView.leftAnchor.constraint(equalTo:  scrollView.leftAnchor, constant: 33).isActive = true
-        aboutMeTextView.topAnchor.constraint(equalTo: aboutMeTextTitle.bottomAnchor).isActive = true
-        aboutMeTextView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -70).isActive = true
-        
-        aboutMyPlaceTextTitle.leftAnchor.constraint(equalTo:  scrollView.leftAnchor, constant: 38).isActive = true
-//        aboutMyPlaceTextTitle.topAnchor.constraint(equalTo: aboutMeTextView.bottomAnchor, constant: 20).isActive = true
-        aboutMyPlaceTextTitle.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        
-        aboutMyPlaceTextView.leftAnchor.constraint(equalTo:  scrollView.leftAnchor, constant: 33).isActive = true
-        aboutMyPlaceTextView.topAnchor.constraint(equalTo: aboutMyPlaceTextTitle.bottomAnchor).isActive = true
-        aboutMyPlaceTextView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -70).isActive = true
-        aboutMyPlaceTextView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20).isActive = true
     }
+    
+    
     func hideAllWhenDeleted(){
         userWasDeleted = true
         
-        activity.isHidden = true
-        friendText.isHidden = true
-        occupationText.isHidden = true
-        currentLocationView.isHidden = true
-        homeLocationView.isHidden = true
-        accepingGuestsTextView.isHidden = true
-        meetingUpTextView.isHidden = true
-        datingTextView.isHidden = true
-        aboutMeTextTitle.isHidden = true
-        aboutMeTextView.isHidden = true
-        aboutServicesTextView.isHidden = true
-        aboutMyServicesTextTitle.isHidden = true
-        aboutMyPlaceTextTitle.isHidden = true
-        aboutMyPlaceTextView.isHidden = true
-        addToWishlistButton.isHidden = true
+        likeButton.isHidden = true
         contactButton.isHidden = true
         reportButton.isHidden = true
         addToBlacklistButton.isHidden = true
         optionsContainer.isHidden = true
         friendshipActionButton.isHidden = true
-        lastProfileImageView.isHidden = true
-        lastProfileImageView.isHidden = true
         profileAvatarView.image = UIImage(named: "deletedprofile")
     }
     func checkIfUserDeleted() {
@@ -1391,18 +1216,131 @@ class MemberProfileController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
-        view.addSubview(mfrContainerView)
-        profileAvatarContainerViewSetup()
-        memberPropsContainerSetup()
-        setupUserPropsValues()
+        
+        
+        
+        // Prepare collection view
+        albumCollectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "image_cell")
+        
+        if let layout = albumCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            let cellWidth = (view.bounds.width - 60) / 3
+            layout.itemSize = CGSize(width: cellWidth, height: cellWidth)
+        }
+        
+       
+        hidesBottomBarWhenPushed = true
+        
+        /*
+        // We need to do magic to make the cell not scrollable
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            
+            self.scrollView.contentSize = self.albumCollectionView.contentSize
+            self.scrollView.contentSize.height += 134
+            
+            self.albumCollectionView.sizeToFit()
+        }*/
+        
+        
+        
+        // Small layout
+        profileAvatarView.layer.cornerRadius = 35   // half of the width
+        
+        
+        populateData()
+        
+//        memberPropsContainerSetup()
         setupNavBarItems()
-        isInYourWishlist()
-        //getImagesURLSArray()
+//        isInYourWishlist()
         optionsContainerSetup()
-        setupUserBlockedStatus()
-        setupYouInBlacklistStatus()
-        checkIfUserDeleted()
-        checkIfYouAreBanned()
+//        setupUserBlockedStatus()
+//        setupYouInBlacklistStatus()
+//        checkIfUserDeleted()
+//        checkIfYouAreBanned()
+        
+        setFriendshipStatus()
     }
+    
+}
+
+
+
+extension MemberProfileController : UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return profileImagesURLSArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "image_cell", for: indexPath) as! ImageCollectionViewCell
+        
+        // Set the cell image
+        cell.imageView.loadImageusingCacheWithUrlString(urlString: profileImagesURLSArray[indexPath.row] )
+        
+        return cell
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // Get the item and do something useful
+    }
+    
+}
+
+class ImageCollectionViewCell : UICollectionViewCell {
+    
+    lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        
+        imageView.frame = self.bounds
+        imageView.autoresizingMask = [UIViewAutoresizing.flexibleLeftMargin, UIViewAutoresizing.flexibleTopMargin, UIViewAutoresizing.flexibleRightMargin, UIViewAutoresizing.flexibleBottomMargin, ]
+        self.addSubview(imageView)
+        
+        imageView.backgroundColor = .lightGray
+        
+        return imageView
+    }()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        imageView.image = nil
+    }
+    
+}
+
+
+class NotScrollableCollectionView: UICollectionView {
+    
+    override var bounds: CGRect {
+        didSet {
+            invalidateIntrinsicContentSize()
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if !__CGSizeEqualToSize(bounds.size, self.intrinsicContentSize) {
+            self.invalidateIntrinsicContentSize()
+        }
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return contentSize
+    }
+ 
+    override func reloadData() {
+        super.reloadData()
+        invalidateIntrinsicContentSize()
+        self.layoutIfNeeded()
+    }
+    
+}
+
+
+
+class UndexTextButton : UIButton {
+    
+    
+    
 }

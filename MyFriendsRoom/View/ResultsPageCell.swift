@@ -8,8 +8,81 @@
 
 import UIKit
 
+protocol ResultsPageCellDelegate {
+    func didSelectLikeAction(_ cell: ResultsPageCell, profile: searchResult )
+    func didSelectViewAction(_ cell: ResultsPageCell, profile: searchResult )
+}
+
 class ResultsPageCell: UICollectionViewCell {
-//    var curLoc: String? = "..."
+
+    var theItem: searchResult?{
+        didSet {
+            setData()
+        }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        viewButton.layer.cornerRadius = viewButton.bounds.width / 2
+        viewButton.titleLabel?.numberOfLines = 2
+    }
+    
+    var delegate: ResultsPageCellDelegate?
+    
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var occupationLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var viewButton: UIButton!
+    
+    @IBAction func likeAction(_ sender: Any?) {
+        
+        // Action invoked on theItem
+        guard let profile = theItem else { return }
+        
+        delegate?.didSelectLikeAction(self, profile: profile)
+    }
+    
+    @IBAction func viewAction(_ sender: Any?) {
+        
+        // Action invoked on theItem
+        
+        guard let profile = theItem else { return }
+        
+        delegate?.didSelectViewAction(self, profile: profile)
+    }
+    
+    
+    
+    // MARK: Data
+    
+    func setData(){
+      
+        let profileImageUrl = theItem?.profileImageUrl
+        
+        nameLabel.text = theItem?.name
+        ageLabel.text = theItem?.age
+        occupationLabel.text = theItem?.occupation
+        
+      
+        if profileImageUrl == "empty" {
+            profileImageView.image = UIImage(named: "emptyavatar")
+        } else if profileImageUrl == "deleted" {
+            profileImageView.image = UIImage(named: "deletedprofile")
+        } else {
+            profileImageView.image = UIImage(named: "emptyavatar")
+            profileImageView.loadImageusingCacheWithUrlString(urlString: profileImageUrl!)
+        }
+       
+    }
+    
+    
+}
+    
+    /*
+    //    var curLoc: String? = "..."
 //    var theItem = Int()
     let mfrContainerView: UIView = {
         let view = UIView()
@@ -42,7 +115,7 @@ class ResultsPageCell: UICollectionViewCell {
 //        tt.isUserInteractionEnabled = false
 //        return tt
 //    }()
-    let profileAvatarContainerView: UIView = {
+    @IBOutlet let profileAvatarContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -220,6 +293,28 @@ class ResultsPageCell: UICollectionViewCell {
         goToProfileButton.bottomAnchor.constraint(equalTo: contactButton.topAnchor, constant: -15).isActive = true
         goToProfileButton.widthAnchor.constraint(equalToConstant: 85).isActive = true
         goToProfileButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        
+        
+        NSLayoutConstraint.activate([
+            
+            // Avatar Container view
+            profileAvatarContainerView.topAnchor.constraint(equalTo: topAnchor),
+            profileAvatarContainerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            profileAvatarContainerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            profileAvatarContainerView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            // Avatar image view
+            profileAvatarContainerView.topAnchor.constraint(equalTo: profileAvatarView.topAnchor),
+            profileAvatarContainerView.leadingAnchor.constraint(equalTo: profileAvatarView.leadingAnchor),
+            profileAvatarContainerView.trailingAnchor.constraint(equalTo: profileAvatarView.trailingAnchor),
+            profileAvatarContainerView.bottomAnchor.constraint(equalTo: profileAvatarView.bottomAnchor),
+            
+            
+            ])
+        
+        
+        
     }
     func setData(){
 //        print("theItem: ", theItem)
@@ -400,4 +495,4 @@ class ResultsPageCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
+*/

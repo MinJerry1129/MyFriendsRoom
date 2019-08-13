@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cellId" id="yar-XT-H8Q" customClass="ResultsPageCell" customModule="MyFriendsRoom" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="360" height="400"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="360" height="400"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ppe-GG-Waf">
+                        <rect key="frame" x="0.0" y="0.0" width="360" height="328.5"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hSu-t6-j7i">
+                        <rect key="frame" x="31" y="342.5" width="329" height="37.5"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FiW-j1-d2J">
+                                <rect key="frame" x="0.0" y="0.0" width="329" height="20.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0v-N4-YQI">
+                                        <rect key="frame" x="0.0" y="0.0" width="43.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                        <color key="textColor" red="0.23921568627450979" green="0.30196078431372547" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cdz-1e-9de">
+                                        <rect key="frame" x="43.5" y="0.0" width="285.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                        <color key="textColor" red="0.23921568630000001" green="0.30196078430000001" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Occupation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTa-En-aww">
+                                <rect key="frame" x="0.0" y="20.5" width="329" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                <color key="textColor" red="0.23921568630000001" green="0.30196078430000001" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W4b-9l-WvQ" userLabel="Like">
+                        <rect key="frame" x="249" y="20" width="91" height="79"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="91" id="ADZ-du-Lgl"/>
+                            <constraint firstAttribute="height" constant="79" id="S4A-Yf-cvi"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                        <color key="tintColor" red="0.99971848730000001" green="0.64634239670000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <inset key="titleEdgeInsets" minX="-99" minY="-7" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="like" image="heartbig">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <connections>
+                            <action selector="likeAction:" destination="yar-XT-H8Q" eventType="touchUpInside" id="QkF-RB-wcX"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EE0-4n-dcQ" userLabel="View Profile">
+                        <rect key="frame" x="262" y="113" width="65" height="65"/>
+                        <color key="backgroundColor" red="0.12941176470588234" green="0.73333333333333328" blue="0.84313725490196079" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="65" id="MMj-64-0AW"/>
+                            <constraint firstAttribute="height" constant="65" id="VvR-Vf-ahl"/>
+                        </constraints>
+                        <color key="tintColor" red="0.98039215690000003" green="0.18823529410000001" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <inset key="titleEdgeInsets" minX="13" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal">
+                            <attributedString key="attributedTitle">
+                                <fragment>
+                                    <string key="content">view
+profile</string>
+                                    <attributes>
+                                        <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <font key="NSFont" size="14" name="HelveticaNeue-Medium"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                        </state>
+                        <connections>
+                            <action selector="viewAction:" destination="yar-XT-H8Q" eventType="touchUpInside" id="0eN-7U-OMe"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="hSu-t6-j7i" firstAttribute="top" secondItem="ppe-GG-Waf" secondAttribute="bottom" constant="14" id="1J3-Qs-Xwi"/>
+                <constraint firstAttribute="trailing" secondItem="hSu-t6-j7i" secondAttribute="trailing" id="3no-3n-bgH"/>
+                <constraint firstItem="EE0-4n-dcQ" firstAttribute="top" secondItem="W4b-9l-WvQ" secondAttribute="bottom" constant="14" id="4XJ-NF-VPt"/>
+                <constraint firstItem="ppe-GG-Waf" firstAttribute="top" secondItem="yar-XT-H8Q" secondAttribute="top" id="565-fe-MOe"/>
+                <constraint firstItem="W4b-9l-WvQ" firstAttribute="top" secondItem="yar-XT-H8Q" secondAttribute="top" constant="20" id="FEA-gh-7gp"/>
+                <constraint firstAttribute="bottom" secondItem="hSu-t6-j7i" secondAttribute="bottom" constant="20" id="Kkc-6r-3BM"/>
+                <constraint firstAttribute="trailing" secondItem="ppe-GG-Waf" secondAttribute="trailing" id="eOj-Na-Hep"/>
+                <constraint firstItem="ppe-GG-Waf" firstAttribute="leading" secondItem="yar-XT-H8Q" secondAttribute="leading" id="q4B-W0-hYh"/>
+                <constraint firstItem="EE0-4n-dcQ" firstAttribute="centerX" secondItem="W4b-9l-WvQ" secondAttribute="centerX" id="qLG-VA-h0p"/>
+                <constraint firstAttribute="trailing" secondItem="W4b-9l-WvQ" secondAttribute="trailing" constant="20" id="sO8-h1-6hk"/>
+                <constraint firstItem="hSu-t6-j7i" firstAttribute="leading" secondItem="yar-XT-H8Q" secondAttribute="leading" constant="31" id="vjR-hE-95l"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="OaH-PK-eyL"/>
+            <connections>
+                <outlet property="ageLabel" destination="Cdz-1e-9de" id="0Uq-UN-Bhj"/>
+                <outlet property="likeButton" destination="W4b-9l-WvQ" id="rV7-2Q-tv1"/>
+                <outlet property="nameLabel" destination="I0v-N4-YQI" id="yWI-BU-nwW"/>
+                <outlet property="occupationLabel" destination="gTa-En-aww" id="RfV-rW-icz"/>
+                <outlet property="profileImageView" destination="ppe-GG-Waf" id="XzG-Wx-ewJ"/>
+                <outlet property="viewButton" destination="EE0-4n-dcQ" id="lsl-Ka-hzf"/>
+            </connections>
+            <point key="canvasLocation" x="128.98550724637681" y="150"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="heartbig" width="100" height="83"/>
+    </resources>
+</document>

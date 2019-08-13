@@ -27,10 +27,31 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, CLLocati
         setActiveDisconectStatus()
         isAuthorizedtoGetUserLocation()
         getCurentGPSLocation()
-        tabBar.tintColor = CustomColors.lightOrange1
-        tabBar.barTintColor = CustomColors.lightOrange1
-        UITabBar.appearance().backgroundColor = CustomColors.lightOrange1
+        
+        
+        tabBar.barStyle = .default
+        //tabBar.barTintColor = .clear// CustomColors.tabBarTint
+        //tabBar.backgroundColor = CustomColors.tabBarTint
+        UITabBar.appearance().backgroundColor = CustomColors.tabBarTint
 //        print("friendslineArray: ", friendslineArray)
+        
+        
+        // Font for tab bar
+        UITabBarItem.appearance().setTitleTextAttributes([
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 10, weight: .medium)],
+                                                         for: .normal)
+        
+        
+        tabBar.backgroundImage = UIImage()
+        tabBar.isTranslucent = false
+        tabBar.barTintColor = CustomColors.tabBarTint
+        tabBar.tintColor = CustomColors.tabBarIconTint
+        if #available(iOS 10.0, *) {
+            tabBar.unselectedItemTintColor = .white
+        }
+        
+        
+        
         takeAllContactsList()//didEnterBackground
         
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackgroundActions), name: NSNotification.Name(rawValue: "didEnterBackground"), object: nil)
@@ -42,44 +63,59 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, CLLocati
         
         let messagesController = MessagesController()
         let messagesNavController = UINavigationController(rootViewController: messagesController)
-        messagesNavController.tabBarItem.title = "Messages"
-        messagesNavController.tabBarItem.setFAIcon(icon: .FAEnvelope, size: CGSize(width: 30, height: 30), orientation: .up, textColor: CustomColors.commonGrey1, selectedTextColor: .white, selectedBackgroundColor: CustomColors.lightOrange1)
-        
+//        messagesNavController.tabBarItem.title = "messages"
+//        messagesNavController.tabBarItem.setFAIcon(icon: .FAEnvelope, size: CGSize(width: 30, height: 30), orientation: .up, textColor: CustomColors.commonGrey1, selectedTextColor: .white, selectedBackgroundColor: .clear )
+//
+        messagesNavController.tabBarItem = UITabBarItem(title: "messages", image: UIImage(named: "tab_messages"), selectedImage: nil)
+        messagesNavController.tabBarItem.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.white], for: .selected)
         
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
         let swipingSRController = SwipingSRControllet(collectionViewLayout: layout)
-        swipingSRController.tabBarItem.title = "Searchline"
-        swipingSRController.tabBarItem.setFAIcon(icon: .FAUsers, size: CGSize(width: 30, height: 30), orientation: .up, textColor: CustomColors.commonGrey1, selectedTextColor: .white, selectedBackgroundColor: CustomColors.lightOrange1)
+        let swipingSRNavController = UINavigationController(rootViewController: swipingSRController)
+//        swipingSRController.tabBarItem.title = "home"
+//        swipingSRController.tabBarItem.setFAIcon(icon: .FAHome, size: CGSize(width: 30, height: 30), orientation: .up, textColor: CustomColors.commonGrey1, selectedTextColor: .white, selectedBackgroundColor: CustomColors.lightOrange1)
+//
+        swipingSRController.tabBarItem = UITabBarItem(title: "home", image: UIImage(named: "tab_home"), selectedImage: nil)
+        swipingSRController.tabBarItem.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.white], for: .selected)
+        
         
         
         let searchControllerPre = SearchController()
         let searchController = UINavigationController(rootViewController: searchControllerPre)
-        searchController.tabBarItem.title = "Search"
-        searchController.tabBarItem.setFAIcon(icon: .FASearch, size: CGSize(width: 30, height: 30), orientation: .up, textColor: CustomColors.commonGrey1, selectedTextColor: .white, selectedBackgroundColor: CustomColors.lightOrange1)
+//        searchController.tabBarItem.title = "search"
+//        searchController.tabBarItem.setFAIcon(icon: .FASearch, size: CGSize(width: 30, height: 30), orientation: .up, textColor: CustomColors.commonGrey1, selectedTextColor: .white, selectedBackgroundColor: CustomColors.lightOrange1)
         
+        searchController.tabBarItem = UITabBarItem(title: "search", image: UIImage(named: "tab_search"), selectedImage: nil)
+        searchController.tabBarItem.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.white], for: .selected)
         
         
         let profileSettingsControllerPre = MyProfileController()
         let profileSettingsController = UINavigationController(rootViewController: profileSettingsControllerPre)
-        profileSettingsController.tabBarItem.title = "Profile"
-        profileSettingsController.tabBarItem.setFAIcon(icon: .FAUser, size: CGSize(width: 30, height: 30), orientation: .up, textColor: CustomColors.commonGrey1, selectedTextColor: .white, selectedBackgroundColor: CustomColors.lightOrange1)
-        
+//        profileSettingsController.tabBarItem.title = "my profile"
+//        profileSettingsController.tabBarItem.setFAIcon(icon: .FAUser, size: CGSize(width: 30, height: 30), orientation: .up, textColor: CustomColors.commonGrey1, selectedTextColor: .white, selectedBackgroundColor: CustomColors.lightOrange1)
+//
+        profileSettingsController.tabBarItem = UITabBarItem(title: "my profile", image: UIImage(named: "tab_profile"), selectedImage: nil)
+        profileSettingsController.tabBarItem.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.white], for: .selected)
+
         let notificationsControllerPre = NotificationsController()
         let notificationsController = UINavigationController(rootViewController: notificationsControllerPre)
-        notificationsController.tabBarItem.title = "Notifications"
-        notificationsController.tabBarItem.setFAIcon(icon: .FABell, size: CGSize(width: 30, height: 30), orientation: .up, textColor: CustomColors.commonGrey1, selectedTextColor: .white, selectedBackgroundColor: CustomColors.lightOrange1)
-//        wishlistController.tabBarItem.setFAIcon(icon: .FAStar, size: CGSize(width: 30, height: 30), orientation: .up, textColor: CustomColors.commonGrey1, selectedTextColor: .white, selectedBackgroundColor: CustomColors.lightOrange1)
+//        notificationsController.tabBarItem.title = "notifications"
+//        notificationsController.tabBarItem.setFAIcon(icon: .FABell, size: CGSize(width: 30, height: 30), orientation: .up, textColor: CustomColors.commonGrey1, selectedTextColor: .white, selectedBackgroundColor: CustomColors.lightOrange1)
+////        wishlistController.tabBarItem.setFAIcon(icon: .FAStar, size: CGSize(width: 30, height: 30), orientation: .up, textColor: CustomColors.commonGrey1, selectedTextColor: .white, selectedBackgroundColor: CustomColors.lightOrange1)
+
+        notificationsController.tabBarItem = UITabBarItem(title: "notifications", image: UIImage(named: "tab_notifications"), selectedImage: nil)
+        notificationsController.tabBarItem.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.white], for: .selected)
         
-        let сontactsControllerPre = ContactsController()
-        let сontactsController = UINavigationController(rootViewController: сontactsControllerPre)
-        сontactsController.tabBarItem.title = "Contacts"
-        сontactsController.tabBarItem.setFAIcon(icon: .FAStar, size: CGSize(width: 30, height: 30), orientation: .up, textColor: CustomColors.commonGrey1, selectedTextColor: .white, selectedBackgroundColor: CustomColors.lightOrange1)
-        
+//
+//        let сontactsControllerPre = ContactsController()
+//        let сontactsController = UINavigationController(rootViewController: сontactsControllerPre)
+//        сontactsController.tabBarItem.title = "Contacts"
+//        сontactsController.tabBarItem.setFAIcon(icon: .FAStar, size: CGSize(width: 30, height: 30), orientation: .up, textColor: CustomColors.commonGrey1, selectedTextColor: .white, selectedBackgroundColor: CustomColors.lightOrange1)
+//
        
         
 //        viewControllers = [messagesNavController, swipingSRController, searchController, profileSettingsController, wishlistController, сontactsController]
-        viewControllers = [messagesNavController, swipingSRController, searchController, profileSettingsController, notificationsController]
+        viewControllers = [swipingSRNavController, messagesNavController,  searchController, profileSettingsController, notificationsController]
 //        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(goToIndex), userInfo: nil, repeats: false)
     }
 //    func setupNavbarButtons(){

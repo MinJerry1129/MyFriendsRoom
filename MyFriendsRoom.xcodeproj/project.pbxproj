@@ -72,6 +72,14 @@
 		67D26A27217CBA3F00D52BD5 /* ReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D26A26217CBA3F00D52BD5 /* ReportController.swift */; };
 		67D26A29217D00D200D52BD5 /* UserProfilePhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D26A28217D00D200D52BD5 /* UserProfilePhotosController.swift */; };
 		67E258AA2158D558006E5962 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E258A92158D558006E5962 /* SearchController.swift */; };
+		AC2354C923018AA900D8E342 /* RangeSeekSliderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2354C623018AA900D8E342 /* RangeSeekSliderDelegate.swift */; };
+		AC2354CA23018AA900D8E342 /* TapticEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2354C723018AA900D8E342 /* TapticEngine.swift */; };
+		AC2354CB23018AA900D8E342 /* RangeSeekSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2354C823018AA900D8E342 /* RangeSeekSlider.swift */; };
+		ACC3149E22FBD0070017CF31 /* ResultsPageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACC3149D22FBD0070017CF31 /* ResultsPageCell.xib */; };
+		ACC314A022FC1F460017CF31 /* MemberProfile.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACC3149F22FC1F460017CF31 /* MemberProfile.xib */; };
+		ACD4DE3022FED21800381E27 /* UsersTrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD4DE2D22FED21700381E27 /* UsersTrayView.swift */; };
+		ACD4DE3122FED21800381E27 /* UsersTrayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD4DE2E22FED21700381E27 /* UsersTrayCell.swift */; };
+		ACD4DE3222FED21800381E27 /* UsersTrayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACD4DE2F22FED21700381E27 /* UsersTrayCell.xib */; };
 		B1C4A292D2C6708C3397F59C /* Pods_MyFriendsRoomUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC42521DA463AB9E91EAE6CB /* Pods_MyFriendsRoomUITests.framework */; };
 		CAB371DA7A4C99D8BF65C563 /* Pods_MyFriendsRoomTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 649C06ACD43608F9EDBD4CE9 /* Pods_MyFriendsRoomTests.framework */; };
 /* End PBXBuildFile section */
@@ -172,6 +180,14 @@
 		888CEF1CAAE69A0995C345EB /* Pods-MyFriendsRoomUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFriendsRoomUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFriendsRoomUITests/Pods-MyFriendsRoomUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8A0CC4FB180CD5C0063CE4A0 /* Pods-MyFriendsRoom.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFriendsRoom.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFriendsRoom/Pods-MyFriendsRoom.debug.xcconfig"; sourceTree = "<group>"; };
 		9B6EF0A16BCD682EDB18FE26 /* Pods_MyFriendsRoom.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFriendsRoom.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC2354C623018AA900D8E342 /* RangeSeekSliderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSeekSliderDelegate.swift; sourceTree = "<group>"; };
+		AC2354C723018AA900D8E342 /* TapticEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapticEngine.swift; sourceTree = "<group>"; };
+		AC2354C823018AA900D8E342 /* RangeSeekSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSeekSlider.swift; sourceTree = "<group>"; };
+		ACC3149D22FBD0070017CF31 /* ResultsPageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultsPageCell.xib; sourceTree = "<group>"; };
+		ACC3149F22FC1F460017CF31 /* MemberProfile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberProfile.xib; sourceTree = "<group>"; };
+		ACD4DE2D22FED21700381E27 /* UsersTrayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTrayView.swift; sourceTree = "<group>"; };
+		ACD4DE2E22FED21700381E27 /* UsersTrayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTrayCell.swift; sourceTree = "<group>"; };
+		ACD4DE2F22FED21700381E27 /* UsersTrayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UsersTrayCell.xib; sourceTree = "<group>"; };
 		B84BF431B3764DD318FD4B97 /* Pods-MyFriendsRoomTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFriendsRoomTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFriendsRoomTests/Pods-MyFriendsRoomTests.release.xcconfig"; sourceTree = "<group>"; };
 		EC42521DA463AB9E91EAE6CB /* Pods_MyFriendsRoomUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFriendsRoomUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -220,6 +236,7 @@
 				677A25652151239A00513F9B /* WellcomeController.swift */,
 				67E258A92158D558006E5962 /* SearchController.swift */,
 				6733705F215A66390003D39D /* MemberProfile.swift */,
+				ACC3149F22FC1F460017CF31 /* MemberProfile.xib */,
 				671976FE216E276100A28CD0 /* MemberPhotosController.swift */,
 				67337063215B87490003D39D /* SwipingSRController.swift */,
 				67B700C0215DDA3300DE2203 /* ContactMemberController.swift */,
@@ -342,6 +359,8 @@
 		6757014A213F02BF0074DCE8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AC2354C523018A9B00D8E342 /* Slider */,
+				ACD4DE2C22FED21700381E27 /* Top tray */,
 				6757014B213F02D90074DCE8 /* UserCell.swift */,
 				67C1967721418C6D001C74A0 /* ChatMessageCell.swift */,
 				67BC74F321653D1D00410264 /* WishlistCell.swift */,
@@ -351,6 +370,7 @@
 				674A15FF216BAE320066F0AE /* AllContactsListCell.swift */,
 				67197700216E290900A28CD0 /* MemberPhotosCell.swift */,
 				67337065215B93570003D39D /* ResultsPageCell.swift */,
+				ACC3149D22FBD0070017CF31 /* ResultsPageCell.xib */,
 				6716AECA21772A54008E20DA /* FirstLaunchController.swift */,
 				61E201662174F5F3006FBD8B /* CustomColors.swift */,
 				6766DD19217C0D8B00792475 /* BlacklistCell.swift */,
@@ -376,6 +396,26 @@
 				EC42521DA463AB9E91EAE6CB /* Pods_MyFriendsRoomUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AC2354C523018A9B00D8E342 /* Slider */ = {
+			isa = PBXGroup;
+			children = (
+				AC2354C823018AA900D8E342 /* RangeSeekSlider.swift */,
+				AC2354C623018AA900D8E342 /* RangeSeekSliderDelegate.swift */,
+				AC2354C723018AA900D8E342 /* TapticEngine.swift */,
+			);
+			path = Slider;
+			sourceTree = "<group>";
+		};
+		ACD4DE2C22FED21700381E27 /* Top tray */ = {
+			isa = PBXGroup;
+			children = (
+				ACD4DE2D22FED21700381E27 /* UsersTrayView.swift */,
+				ACD4DE2E22FED21700381E27 /* UsersTrayCell.swift */,
+				ACD4DE2F22FED21700381E27 /* UsersTrayCell.xib */,
+			);
+			path = "Top tray";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -495,8 +535,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACC3149E22FBD0070017CF31 /* ResultsPageCell.xib in Resources */,
 				0DDF128E21302B16001BA72D /* LaunchScreen.storyboard in Resources */,
+				ACD4DE3222FED21800381E27 /* UsersTrayCell.xib in Resources */,
 				0DDF128B21302B16001BA72D /* Assets.xcassets in Resources */,
+				ACC314A022FC1F460017CF31 /* MemberProfile.xib in Resources */,
 				0D7E39DC213AE08C003BB2A0 /* Localizable.strings in Resources */,
 				0D9AD3322131E12400C34D98 /* splashscreen.png in Resources */,
 				0DDF128621302AFC001BA72D /* Main.storyboard in Resources */,
@@ -651,6 +694,7 @@
 				67160E2C21C890AF0067DA4E /* LikeMeController.swift in Sources */,
 				67BC74F421653D1D00410264 /* WishlistCell.swift in Sources */,
 				67070DB12166399A0070FA8D /* UserPhotosControler.swift in Sources */,
+				AC2354CB23018AA900D8E342 /* RangeSeekSlider.swift in Sources */,
 				0D9AD3342131F5E800C34D98 /* ShowSplashScreen.swift in Sources */,
 				67D26A29217D00D200D52BD5 /* UserProfilePhotosController.swift in Sources */,
 				67C2FD7F21991570009A0B35 /* BugReportController.swift in Sources */,
@@ -680,8 +724,10 @@
 				6753EA0621535A9600EC0F6C /* userfull.swift in Sources */,
 				674A15FA216B83C70066F0AE /* ProposalSentController.swift in Sources */,
 				0D7E39E5213AEE01003BB2A0 /* User.swift in Sources */,
+				ACD4DE3022FED21800381E27 /* UsersTrayView.swift in Sources */,
 				67160E2E21C89B510067DA4E /* LikeMeCell.swift in Sources */,
 				6793DD0921636FDF008388BD /* TabBarController.swift in Sources */,
+				AC2354C923018AA900D8E342 /* RangeSeekSliderDelegate.swift in Sources */,
 				0D7E39E2213AE7BD003BB2A0 /* NewMessageController.swift in Sources */,
 				67271BE621F8FF4700F5F085 /* Notification.swift in Sources */,
 				67197701216E290900A28CD0 /* MemberPhotosCell.swift in Sources */,
@@ -692,9 +738,11 @@
 				67337066215B93570003D39D /* ResultsPageCell.swift in Sources */,
 				67570149213ED6DD0074DCE8 /* Message.swift in Sources */,
 				0DFE0B662139A347003420F0 /* KeyboardController.swift in Sources */,
+				AC2354CA23018AA900D8E342 /* TapticEngine.swift in Sources */,
 				67B558CC21FECA4F0061FECC /* SearchResult.swift in Sources */,
 				0D6434952135981D008C5F44 /* LoginController.swift in Sources */,
 				674A15F8216B7A230066F0AE /* ProposalReceivedListCell.swift in Sources */,
+				ACD4DE3122FED21800381E27 /* UsersTrayCell.swift in Sources */,
 				677A25662151239A00513F9B /* WellcomeController.swift in Sources */,
 				674A15FC216B84450066F0AE /* ProposalSentListCell.swift in Sources */,
 				6769E0B02173916100410AD6 /* FBLoginController.swift in Sources */,
@@ -882,7 +930,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.myfriendsroomlimited-com.myfriendsroomlimited-com.myfriendsroomlimited-";
+				PRODUCT_BUNDLE_IDENTIFIER = com.myfriendsroomlimited;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_REFLECTION_METADATA_LEVEL = none;
 				SWIFT_VERSION = 4.0;
@@ -904,7 +952,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.myfriendsroomlimited-com.myfriendsroomlimited-com.myfriendsroomlimited-";
+				PRODUCT_BUNDLE_IDENTIFIER = com.myfriendsroomlimited;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_REFLECTION_METADATA_LEVEL = none;
 				SWIFT_VERSION = 4.0;
@@ -919,6 +967,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QMJ6S9Q3D8;
 				INFOPLIST_FILE = MyFriendsRoomTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -940,6 +989,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QMJ6S9Q3D8;
 				INFOPLIST_FILE = MyFriendsRoomTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -960,6 +1010,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QMJ6S9Q3D8;
 				INFOPLIST_FILE = MyFriendsRoomUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -980,6 +1031,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QMJ6S9Q3D8;
 				INFOPLIST_FILE = MyFriendsRoomUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
