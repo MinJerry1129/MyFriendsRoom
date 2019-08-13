@@ -427,7 +427,7 @@ class MemberProfileController: UIViewController {
         }
     }
     
-    @objc func addToWishlist(){
+    @IBAction func addToWishlist(){
         checkIfYouAreBanned()
         let addItToWishlistByUid = goToControllerByMemberUid
         let uid = Auth.auth().currentUser!.uid
@@ -442,13 +442,13 @@ class MemberProfileController: UIViewController {
         print("Add to wishlist")
         inWishList = true
     }
-    @objc func contactMember(){
+    @IBAction func contactMember(){
         checkIfYouAreBanned()
         let contactMemberController = ContactMemberController()
         let contactMemberNav = UINavigationController(rootViewController: contactMemberController)
         self.present(contactMemberNav, animated: true, completion: nil)
     }
-    @objc func friendshipAction(){
+    @IBAction func friendshipAction(){
         checkIfYouAreBanned()
         let uid = Auth.auth().currentUser?.uid
         let friendsRef = Database.database().reference().child("users-friends").child(uid!)
@@ -682,12 +682,13 @@ class MemberProfileController: UIViewController {
         self.present(alert, animated: true)
     }
     func hideFriendshipActionButton(){
-        friendshipActionButton.heightAnchor.constraint(equalToConstant: 0).isActive = true
-        friendshipActionButton.titleLabel?.heightAnchor.constraint(equalToConstant: 0).isActive = true
+   //     friendshipActionButton.heightAnchor.constraint(equalToConstant: 0).isActive = true
+   //     friendshipActionButton.titleLabel?.heightAnchor.constraint(equalToConstant: 0).isActive = true
+        friendshipActionButton.isHidden = true
     }
     func acceptFriendshipProposalSetup(){
  //       friendshipActionButton.titleLabel?.leftAnchor.constraint(equalTo: friendshipActionButton.leftAnchor).isActive = true
-        friendshipActionButton.setTitle("+accept", for: .normal)
+        friendshipActionButton.setTitle("accept request", for: .normal)
         friendshipActionButton.titleLabel?.textColor = CustomColors.commonBlue1
    //     scrollView.addSubview(friendshipActionButton)
    //     friendshipActionButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
@@ -696,7 +697,7 @@ class MemberProfileController: UIViewController {
     }
     func proposalWasSentButtonSetup(){
     //    friendshipActionButton.titleLabel?.leftAnchor.constraint(equalTo: friendshipActionButton.leftAnchor).isActive = true
-        friendshipActionButton.setTitle("-cancel", for: .normal)
+        friendshipActionButton.setTitle("cancel request", for: .normal)
         friendshipActionButton.titleLabel?.textColor = CustomColors.commonBlue1
    //     scrollView.addSubview(friendshipActionButton)
    //     friendshipActionButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
@@ -705,7 +706,7 @@ class MemberProfileController: UIViewController {
     }
     func deleteFromFriendsButtonSetup(){
     //    friendshipActionButton.titleLabel?.leftAnchor.constraint(equalTo: friendshipActionButton.leftAnchor).isActive = true
-        friendshipActionButton.setTitle("-delete", for: .normal)
+        friendshipActionButton.setTitle("remove friend", for: .normal)
         friendshipActionButton.titleLabel?.textColor = CustomColors.commonBlue1
  //       scrollView.addSubview(friendshipActionButton)
 // //       friendshipActionButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
@@ -718,8 +719,7 @@ class MemberProfileController: UIViewController {
     }
     func addToFriendsButtonSetup(){
     //    friendshipActionButton.titleLabel?.leftAnchor.constraint(equalTo: friendshipActionButton.leftAnchor).isActive = true
-        friendshipActionButton.setTitle("+friend", for: .normal)
-        friendshipActionButton.titleLabel?.textColor = CustomColors.commonBlue1
+        friendshipActionButton.setTitle("add friend", for: .normal)
     }
     
     
@@ -777,7 +777,10 @@ class MemberProfileController: UIViewController {
                     let string = "FRIEND"
                     let stringLen = string.count
                     let attributedStr = NSMutableAttributedString.init(string: string)
+                    attributedStr.addAttribute(.font, value: UIFont(name: "HelveticaNeue-Medium", size: 11.0)!, range: NSRange(location: 0, length: stringLen))
                     attributedStr.addAttribute(.foregroundColor, value: CustomColors.lightOrange1, range: NSRange(location: 0, length: stringLen))
+                    
+                    self.connectionIndicatorLabel.attributedText = attributedStr
                     
                 } else {
                     print("commonFriend: ",commonFriend)
@@ -789,8 +792,10 @@ class MemberProfileController: UIViewController {
                         let string = "FRIEND of " + name!
                         let stringLen = string.count
                         let attributedStr = NSMutableAttributedString.init(string: string)
+                        attributedStr.addAttribute(.font, value: UIFont(name: "HelveticaNeue-Medium", size: 11.0)!, range: NSRange(location: 0, length: stringLen))
                         attributedStr.addAttribute(.foregroundColor, value: CustomColors.commonGrey1, range: NSRange(location: 0, length: stringLen))
                         attributedStr.addAttribute(.foregroundColor, value: CustomColors.lightOrange1, range: NSRange(location: 0, length: 6))
+                        
                         
                         self.connectionIndicatorLabel.attributedText = attributedStr
                         
@@ -986,7 +991,7 @@ class MemberProfileController: UIViewController {
             
             // Name
             if let name = name {
-                compose.append( NSAttributedString(string: name.appending(""),
+                compose.append( NSAttributedString(string: name.appending(" "),
                                                    attributes: [
                                                     .font: UIFont(name: "HelveticaNeue-Medium", size: 18.0)!,
                                                     .foregroundColor: UIColor(red: 61.0 / 255.0, green: 77.0 / 255.0, blue: 89.0 / 255.0, alpha: 1.0)

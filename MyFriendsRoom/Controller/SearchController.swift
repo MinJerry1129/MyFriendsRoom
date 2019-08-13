@@ -1505,12 +1505,12 @@ class SearchController: UIViewController {
     @objc func wayToSearching(){
         let screenHeight = Int(view.frame.height)
         var phone = String()
-        if screenHeight < 666 {
-            phone = "old"
-        } else {
-            phone = "new"
-        }
-        checkIfAnyChecked(phone: phone)
+//        if screenHeight < 666 {
+//            phone = "old"
+//        } else {
+//            phone = "new"
+//        }
+        checkIfAnyChecked(phone: "new")
     }
     @objc func goAC(){
         let acController = GMSAutocompleteViewController()
