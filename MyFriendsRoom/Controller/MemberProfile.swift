@@ -858,11 +858,11 @@ class MemberProfileController: UIViewController {
             
             let acceptingGuests = value["acceptingGuests"] as? String
             let homeLocation = value["loc"] as? String
-            let name = value["name"] as? String
+            let name = ( value["name"] as? String )?.trimmingCharacters(in: .whitespacesAndNewlines)
             
             
             let occupation = value["occupation"] as? String
-            let age = value["age"] as? String
+            let age = ( value["age"] as? String )?.trimmingCharacters(in: .whitespacesAndNewlines)
             
             // Can be nil
             var lastSeen: String = ""

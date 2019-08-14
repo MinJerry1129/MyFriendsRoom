@@ -44,23 +44,31 @@
                                                 <constraint firstAttribute="height" constant="70" id="l4C-q6-xq7"/>
                                             </constraints>
                                         </imageView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yw4-7u-ieX">
-                                            <rect key="frame" x="120" y="8" width="220" height="60"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="yw4-7u-ieX">
+                                            <rect key="frame" x="120" y="8" width="230" height="60"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZS4-Wo-BOj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="220" height="34"/>
-                                                    <attributedString key="attributedText"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="3.5" height="13.5"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content=" ">
+                                                            <attributes>
+                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                <font key="NSFont" metaFont="smallSystem"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="hr2-HX-mow">
-                                                    <rect key="frame" x="0.0" y="44" width="220" height="16"/>
+                                                <stackView opaque="NO" contentMode="scaleAspectFit" distribution="equalCentering" spacing="20" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hr2-HX-mow">
+                                                    <rect key="frame" x="0.0" y="44" width="230" height="16"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="fsx-l0-bCL">
                                                             <rect key="frame" x="0.0" y="0.0" width="49" height="16"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="49" id="UaC-VF-hXj"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                             <color key="tintColor" red="0.99971848730000001" green="0.64634239670000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <inset key="titleEdgeInsets" minX="-49" minY="40" maxX="0.0" maxY="0.0"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="-5" maxX="0.0" maxY="0.0"/>
@@ -72,11 +80,11 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenDisabled="NO" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="WGX-9g-lhr">
-                                                            <rect key="frame" x="78" y="0.0" width="49" height="16"/>
+                                                            <rect key="frame" x="81" y="0.0" width="49" height="16"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="49" id="YCJ-dC-ekP"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                             <inset key="titleEdgeInsets" minX="-49" minY="40" maxX="0.0" maxY="0.0"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="-5" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" title="message" image="envelopeBlue">
@@ -87,13 +95,13 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenDisabled="NO" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="rVK-6U-WIJ">
-                                                            <rect key="frame" x="140" y="0.0" width="80" height="16"/>
+                                                            <rect key="frame" x="150" y="0.0" width="80" height="16"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="80" id="f9u-FD-Wph"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                             <inset key="titleEdgeInsets" minX="-44" minY="40" maxX="0.0" maxY="0.0"/>
-                                                            <inset key="imageEdgeInsets" minX="19" minY="-5" maxX="0.0" maxY="0.0"/>
+                                                            <inset key="imageEdgeInsets" minX="19" minY="-3" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" title="friend" image="addFriend">
                                                                 <color key="titleColor" red="0.23921568630000001" green="0.30196078430000001" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
@@ -108,13 +116,13 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="yw4-7u-ieX" secondAttribute="trailing" constant="35" id="0S9-Ml-0eX"/>
                                         <constraint firstItem="yw4-7u-ieX" firstAttribute="leading" secondItem="BmW-jS-MwC" secondAttribute="trailing" constant="25" id="0qg-xH-fND"/>
                                         <constraint firstAttribute="bottom" secondItem="BmW-jS-MwC" secondAttribute="bottom" constant="3" id="XBh-Uo-XdP"/>
                                         <constraint firstItem="yw4-7u-ieX" firstAttribute="bottom" secondItem="BmW-jS-MwC" secondAttribute="bottom" constant="-5" id="dnP-bM-FvD"/>
                                         <constraint firstItem="BmW-jS-MwC" firstAttribute="leading" secondItem="R8F-sZ-d5k" secondAttribute="leading" constant="25" id="gkp-5w-I8o"/>
                                         <constraint firstItem="yw4-7u-ieX" firstAttribute="top" secondItem="BmW-jS-MwC" secondAttribute="top" constant="5" id="kIf-nM-TKL"/>
                                         <constraint firstItem="BmW-jS-MwC" firstAttribute="top" secondItem="R8F-sZ-d5k" secondAttribute="top" constant="3" id="vxB-vK-VLF"/>
+                                        <constraint firstAttribute="trailing" secondItem="yw4-7u-ieX" secondAttribute="trailing" constant="25" id="wfj-Vs-tsv"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ws7-JK-GRI">
@@ -168,9 +176,11 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="nTG-6m-v2d" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="1Uq-CZ-Pza"/>
+                <constraint firstItem="dHH-8t-lJe" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="UQ3-Q9-NdW"/>
                 <constraint firstAttribute="bottom" secondItem="nTG-6m-v2d" secondAttribute="bottom" id="Y7J-wz-Woc"/>
                 <constraint firstItem="nTG-6m-v2d" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="kZG-s1-GxN"/>
                 <constraint firstItem="nTG-6m-v2d" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="rzG-7v-035"/>
+                <constraint firstItem="R8F-sZ-d5k" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="vMA-6X-fTb"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="131.8840579710145" y="147.99107142857142"/>

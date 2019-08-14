@@ -62,8 +62,8 @@ class ResultsPageCell: UICollectionViewCell {
       
         let profileImageUrl = theItem?.profileImageUrl
         
-        nameLabel.text = theItem?.name
-        ageLabel.text = theItem?.age
+        nameLabel.text = theItem?.name?.trimmingCharacters(in: .whitespacesAndNewlines)
+        ageLabel.text = theItem?.age?.trimmingCharacters(in: .whitespacesAndNewlines)
         occupationLabel.text = theItem?.occupation
         
       
