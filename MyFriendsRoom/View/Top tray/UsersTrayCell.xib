@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UsersTrayCell" id="gTV-IL-0wX" customClass="UsersTrayCell" customModule="MyFriendsRoom" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5e1-tb-swU">
+                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmY-fj-KK5">
+                        <rect key="frame" x="17" y="26.5" width="36" height="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="jmY-fj-KK5" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="BHe-LS-4iv"/>
+                <constraint firstItem="jmY-fj-KK5" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="T1D-Q0-Tf4"/>
+                <constraint firstAttribute="trailing" secondItem="5e1-tb-swU" secondAttribute="trailing" id="Teq-N3-g2e"/>
+                <constraint firstItem="5e1-tb-swU" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="VoI-ZL-EZz"/>
+                <constraint firstItem="5e1-tb-swU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="vro-cB-T9k"/>
+                <constraint firstAttribute="bottom" secondItem="5e1-tb-swU" secondAttribute="bottom" id="xpz-jY-cLW"/>
+            </constraints>
+            <connections>
+                <outlet property="profilePictureImageView" destination="5e1-tb-swU" id="8Hw-NU-pyW"/>
+                <outlet property="userNameLabel" destination="jmY-fj-KK5" id="Wd3-ey-llg"/>
+            </connections>
+            <point key="canvasLocation" x="-35.200000000000003" y="59.370314842578715"/>
+        </collectionViewCell>
+    </objects>
+</document>

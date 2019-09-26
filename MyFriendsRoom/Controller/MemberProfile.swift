@@ -1288,6 +1288,7 @@ extension MemberProfileController : UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Get the item and do something useful
+        seeMemberProfileImages()
     }
     
 }
